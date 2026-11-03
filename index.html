@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#162822" />
+    <title>Aurelia — An Alpine Reverie</title>
+    <link rel="icon" href="data:," />
+  </head>
+  <body>
+    <canvas id="world"></canvas>
+    <div id="loading">
+      <div class="eyebrow">A FIELD STUDY IN LIGHT</div>
+      <h1>Aurelia</h1>
+      <p>Entering the alpine quiet</p>
+      <div class="track"><i id="progress"></i></div>
+      <span id="load-detail">Preparing the valley</span>
+    </div>
+    <div id="interface">
+      <header>
+        <a class="brand" href="./">AURELIA<span>THE ALPINE STUDY</span></a>
+        <div class="location">
+          46° 35' N &nbsp; 10° 44' E<br /><span>GOLDEN HOUR / 18:42</span>
+        </div>
+      </header>
+      <div class="caption">
+        <div class="eyebrow">A PLACE TO SLOW DOWN</div>
+        <h2>Where the light stays.</h2>
+        <p>Alpine water. Ancient stone. A passing moment.</p>
+      </div>
+      <footer>
+        <button id="enter">Explore the valley <span>&#8599;</span></button>
+        <div class="controls">
+          <span>W A S D</span> move &nbsp; · &nbsp; Mouse look &nbsp; · &nbsp;
+          Shift faster &nbsp; · &nbsp; Q / E vertical<br /><span>C</span>
+          cinematic tour &nbsp; · &nbsp; Esc release
+        </div>
+        <button id="cinema">Cinematic tour <span>&#8599;</span></button>
+      </footer>
+      <div id="shot-label"></div>
+      <div class="crosshair">+</div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
