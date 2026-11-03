@@ -1,6 +1,6 @@
 {
   "name": "aurelia-alpine-valley",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,10 +10,13 @@
     "verify": "node scripts/verify.mjs"
   },
   "dependencies": {
-    "postprocessing": "6.39.6",
     "three": "0.187.0"
   },
   "devDependencies": {
+    "@gltf-transform/core": "^4.5.1",
+    "@gltf-transform/extensions": "^4.5.1",
+    "@gltf-transform/functions": "^4.5.1",
+    "meshoptimizer": "^1.3.0",
     "puppeteer": "25.16.0",
     "vite": "8.3.5"
   }

@@ -1,136 +1,194 @@
-import * as THREE from "three";
+import * as THREE from "three/webgpu";
+import { uniform } from "three/tsl";
 import { PointerLockControls } from "three/addons/controls/PointerLockControls.js";
 import "./style.css";
-import { height } from "./math.js";
+import { height, generateHeightmap } from "./math.js";
 import { loadSurfaces, createTerrain } from "./terrain.js";
-import { createWater } from "./water.js";
+import { createForest } from "./forest.js";
 import { createVegetation } from "./vegetation.js";
 import { createSky } from "./sky.js";
+import { createWater } from "./water.js";
 import { createPost } from "./post.js";
-import { updateTour, tourPose } from "./cinematic.js";
+import { updateTour, tourPose, rebuildCorridors } from "./cinematic.js";
 const params = new URLSearchParams(location.search),
-  capture = params.get("capture") === "1";
+  capture = params.get("capture") === "1",
+  ultra = params.get("quality") === "ultra";
 let cinematic = params.get("cinematic") === "1";
-if (capture) document.body.classList.add("capture");
 window.__ready = false;
 window.__errors = [];
-const canvas = document.querySelector("#world");
-const renderer = new THREE.WebGLRenderer({
-  canvas,
-  antialias: false,
-  powerPreference: "high-performance",
-  preserveDrawingBuffer: capture,
-});
-renderer.setPixelRatio(capture ? 1 : Math.min(devicePixelRatio, 1.5));
-renderer.setSize(innerWidth, innerHeight);
-renderer.outputColorSpace = THREE.SRGBColorSpace;
-// Avoid driver dithering that can change the last output bit between identical frames.
-renderer.getContext().disable(renderer.getContext().DITHER);
-renderer.toneMapping = THREE.NoToneMapping;
-renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFShadowMap;
-const scene = new THREE.Scene(),
-  camera = new THREE.PerspectiveCamera(54, innerWidth / innerHeight, 0.5, 8000);
-camera.position.set(-330, height(-330, 670) + 5, 670);
-camera.lookAt(0, 170, -650);
-const manager = new THREE.LoadingManager();
-manager.onProgress = (url, loaded, total) => {
-  document.querySelector("#progress").style.width = `${(loaded / total) * 90}%`;
-  document.querySelector("#load-detail").textContent =
-    `Loading natural materials - ${loaded} / ${total}`;
-};
-manager.onError = (url) => {
-  window.__errors.push("Asset failed: " + url);
-  console.error("Asset failed:", url);
-};
-const timeUniform = { value: 0 },
-  keys = new Set(),
-  controls = new PointerLockControls(camera, canvas);
-let elapsed = 0,
-  last = 0,
-  tourStart = 0;
-function toggleCinematic() {
-  cinematic = !cinematic;
-  tourStart = elapsed;
-  controls.unlock();
-  document.body.classList.toggle("cinematic", cinematic);
+if (capture) document.body.classList.add("capture");
+const loading = document.querySelector("#loading"),
+  detail = document.querySelector("#load-detail"),
+  canvas = document.querySelector("#world");
+function fail(error) {
+  window.__errors.push(String(error));
+  console.error(error);
+  loading.style.display = "flex";
+  loading.style.opacity = 1;
+  detail.textContent = String(error.message || error);
+  document.querySelector("#interface").style.display = "none";
 }
-document.querySelector("#enter").onclick = () => {
-  cinematic = false;
-  controls.lock();
-};
-document.querySelector("#cinema").onclick = toggleCinematic;
-controls.addEventListener("lock", () => document.body.classList.add("locked"));
-controls.addEventListener("unlock", () =>
-  document.body.classList.remove("locked"),
-);
-addEventListener("keydown", (e) => {
-  keys.add(e.code);
-  if (e.code === "KeyC" && !e.repeat) toggleCinematic();
-});
-addEventListener("keyup", (e) => keys.delete(e.code));
-addEventListener("blur", () => keys.clear());
 try {
+  if (!navigator.gpu)
+    throw Error(
+      "WebGPU is required. Open this world in a current Chrome or Edge with hardware acceleration enabled.",
+    );
+  const adapter = await navigator.gpu.requestAdapter({
+    powerPreference: "high-performance",
+  });
+  if (!adapter)
+    throw Error(
+      "No WebGPU adapter is available. Enable hardware acceleration and update your graphics driver.",
+    );
+  const requiredFeatures = [
+    "float32-filterable",
+    "shader-f16",
+    "texture-compression-bc",
+    "depth-clip-control",
+    "indirect-first-instance",
+  ].filter((f) => adapter.features.has(f));
+  const device = await adapter.requestDevice({ requiredFeatures });
+  device.addEventListener("uncapturederror", (event) => {
+    window.__errors.push(event.error.message);
+    console.error("WebGPU validation:", event.error.message);
+  });
+  const renderer = new THREE.WebGPURenderer({
+    canvas,
+    device,
+    antialias: false,
+    powerPreference: "high-performance",
+  });
+  await renderer.init();
+  if (!renderer.backend.isWebGPUBackend)
+    throw Error(
+      "A native WebGPU backend is required; WebGL fallback has been disabled.",
+    );
+  window.__backend = {
+    isWebGPUBackend: renderer.backend.isWebGPUBackend,
+    adapter: {
+      vendor: adapter.info.vendor,
+      architecture: adapter.info.architecture,
+      device: adapter.info.device,
+      description: adapter.info.description,
+    },
+  };
+  console.info(
+    "renderer.backend.isWebGPUBackend =",
+    renderer.backend.isWebGPUBackend,
+    JSON.stringify(window.__backend),
+  );
+  renderer.setPixelRatio(capture ? 1 : Math.min(devicePixelRatio, 1.25));
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.toneMapping = THREE.AgXToneMapping;
+  renderer.toneMappingExposure = 0.95;
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFShadowMap;
+  const scene = new THREE.Scene(),
+    camera = new THREE.PerspectiveCamera(
+      55,
+      innerWidth / innerHeight,
+      0.35,
+      14000,
+    ),
+    clock = uniform(0);
+  detail.textContent = "Eroding ridgelines and carving glacial channels";
+  await new Promise((r) => setTimeout(r, 10));
+  generateHeightmap();
+  rebuildCorridors();
+  camera.position.set(-330, height(-330, 670) + 4.5, 670);
+  camera.lookAt(0, 200, -800);
+  const manager = new THREE.LoadingManager();
+  manager.onProgress = (_, n, total) => {
+    document.querySelector("#progress").style.width =
+      `${Math.round((n / total) * 90)}%`;
+    detail.textContent = `Loading CC0 materials - ${n}/${total}`;
+  };
+  manager.onError = (url) => {
+    window.__errors.push(url);
+    console.error("Asset failed", url);
+  };
   const [surfaces, sky] = await Promise.all([
     loadSurfaces(manager),
-    createSky(scene, renderer, manager),
+    createSky(scene, renderer, manager, clock, ultra),
   ]);
-  createTerrain(scene, surfaces);
-  const water = createWater(scene, sky.sunDirection, capture);
-  const vegetation = await createVegetation(
-    scene,
-    surfaces,
-    manager,
-    timeUniform,
-  );
-  window.__sceneStats = vegetation.counts;
-  window.__tourCollisionCheck = () => {
-    let groundMargin = Infinity,
-      treeMargin = Infinity;
-    for (let t = 0; t < 300; t += 0.25) {
-      const p = tourPose(t).position;
-      groundMargin = Math.min(groundMargin, p.y - height(p.x, p.z));
-      for (const tree of vegetation.trees) {
-        if (p.y < tree.y + 21 * tree.s && p.y > tree.y - 1)
-          treeMargin = Math.min(
-            treeMargin,
-            Math.hypot(p.x - tree.x, p.z - tree.z) - 5 * tree.s,
-          );
-      }
-    }
-    return { groundMargin, treeMargin };
+  const terrain = createTerrain(scene, surfaces);
+  terrain.update(camera, ultra);
+  const water = createWater(scene, clock, sky.direction, ultra);
+  const forest = await createForest(scene, manager, clock);
+  const plants = await createVegetation(scene, surfaces, manager, clock);
+  forest.update(camera);
+  plants.update(camera);
+  window.__sceneStats = {
+    ...forest.counts,
+    ...plants.counts,
+    terrainTiles: terrain.tiles.length,
+    heightmapResolution: 1025,
+    compute: "WebGPU grass wind + distance culling",
   };
-  const composer = createPost(renderer, scene, camera, sky.disk, capture);
+  const post = createPost(renderer, scene, camera, sky.shaftSun, ultra),
+    controls = new PointerLockControls(camera, canvas),
+    keys = new Set();
+  let elapsed = 0,
+    last = 0,
+    tourStart = 0,
+    frames = 0;
+  function toggle() {
+    cinematic = !cinematic;
+    tourStart = elapsed;
+    controls.unlock();
+    document.body.classList.toggle("cinematic", cinematic);
+  }
+  document.querySelector("#enter").onclick = () => {
+    cinematic = false;
+    document.body.classList.remove("cinematic");
+    controls.lock();
+  };
+  document.querySelector("#cinema").onclick = toggle;
+  controls.addEventListener("lock", () =>
+    document.body.classList.add("locked"),
+  );
+  controls.addEventListener("unlock", () =>
+    document.body.classList.remove("locked"),
+  );
+  addEventListener("keydown", (e) => {
+    keys.add(e.code);
+    if (e.code === "KeyC" && !e.repeat) toggle();
+  });
+  addEventListener("keyup", (e) => keys.delete(e.code));
+  addEventListener("blur", () => keys.clear());
+  let shadowTick = -1;
+  const shadowPosition = new THREE.Vector3(Infinity, Infinity, Infinity),
+    shadowRotation = new THREE.Quaternion();
   function render(t, dt = 0) {
-    timeUniform.value = t;
-    water.update(t);
-    if (cinematic) {
+    clock.value = t;
+    if (cinematic)
       document.querySelector("#shot-label").textContent = updateTour(
         camera,
         capture ? t : t - tourStart,
       );
-    } else if (!capture && controls.isLocked) {
-      const speed = (keys.has("ShiftLeft") ? 95 : 24) * dt;
+    else if (!capture && controls.isLocked) {
+      const speed = (keys.has("ShiftLeft") ? 90 : 20) * dt;
       controls.moveForward(
-        ((keys.has("KeyW") ? 1 : 0) - (keys.has("KeyS") ? 1 : 0)) * speed,
+        (Number(keys.has("KeyW")) - Number(keys.has("KeyS"))) * speed,
       );
       controls.moveRight(
-        ((keys.has("KeyD") ? 1 : 0) - (keys.has("KeyA") ? 1 : 0)) * speed,
+        (Number(keys.has("KeyD")) - Number(keys.has("KeyA"))) * speed,
       );
       camera.position.y +=
-        ((keys.has("KeyE") ? 1 : 0) - (keys.has("KeyQ") ? 1 : 0)) * speed;
+        (Number(keys.has("KeyE")) - Number(keys.has("KeyQ"))) * speed;
       camera.position.x = THREE.MathUtils.clamp(camera.position.x, -2100, 2100);
       camera.position.z = THREE.MathUtils.clamp(camera.position.z, -2100, 2100);
       camera.position.y = Math.max(
         camera.position.y,
-        height(camera.position.x, camera.position.z) + 3,
-        25,
+        height(camera.position.x, camera.position.z) + 2.2,
+        24.2,
       );
-      for (const tree of vegetation.trees) {
-        const dx = camera.position.x - tree.x,
-          dz = camera.position.z - tree.z,
+      for (const tr of forest.trees) {
+        const dx = camera.position.x - tr.x,
+          dz = camera.position.z - tr.z,
           d = Math.hypot(dx, dz);
-        if (d < 2 && camera.position.y < tree.y + 18 * tree.s) {
+        if (d < 2 && camera.position.y < tr.y + 22 * tr.s) {
           camera.position.x += (dx / (d || 1)) * (2 - d);
           camera.position.z += (dz / (d || 1)) * (2 - d);
         }
@@ -138,23 +196,34 @@ try {
     }
     camera.updateMatrixWorld();
     sky.update(t, camera);
-    composer.render(0);
+    terrain.update(camera, ultra);
+    forest.update(camera, capture);
+    plants.update(camera);
+    const tick = Math.floor(t * 6),
+      refresh =
+        capture ||
+        tick !== shadowTick ||
+        camera.position.distanceToSquared(shadowPosition) > 0.001 ||
+        camera.quaternion.angleTo(shadowRotation) > 0.001;
+    for (const light of [...sky.csm.lights, sky.shaftSun]) {
+      light.shadow.autoUpdate = false;
+      light.shadow.needsUpdate = refresh;
+    }
+    shadowTick = tick;
+    shadowPosition.copy(camera.position);
+    shadowRotation.copy(camera.quaternion);
+    renderer.compute(plants.compute);
+    post.render();
+    frames++;
+    window.__renderedFrames = frames;
   }
-  addEventListener("resize", () => {
-    camera.aspect = innerWidth / innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(innerWidth, innerHeight);
-    composer.setSize(innerWidth, innerHeight);
-    if (capture && window.__ready) render(elapsed);
-  });
   window.__renderFrame = async (t) => {
     if (!Number.isFinite(t) || t < 0)
-      throw new Error("Frame time must be finite nonnegative seconds");
+      throw Error("t must be finite nonnegative seconds");
     elapsed = t;
     window.__captureTime = t;
-    // Settle reflection/shadow dependencies after arbitrary time and camera seeks.
-    for (let settle = 0; settle < 2; settle++) render(t);
-    renderer.getContext().finish();
+    render(t);
+    await device.queue.onSubmittedWorkDone();
   };
   window.__setMode = (mode) => {
     cinematic = mode === "cinematic";
@@ -167,17 +236,40 @@ try {
       ground: height(p.position.x, p.position.z),
     };
   };
-  document.querySelector("#load-detail").textContent =
-    "Warming light, reflections and shaders";
+  window.__tourCollisionCheck = () => {
+    let groundMargin = Infinity,
+      treeMargin = Infinity;
+    for (let t = 0; t < 300; t += 0.25) {
+      const p = tourPose(t).position;
+      groundMargin = Math.min(groundMargin, p.y - height(p.x, p.z));
+      for (const tr of forest.trees)
+        if (p.y < tr.y + 22 * tr.s && p.y > tr.y - 1)
+          treeMargin = Math.min(
+            treeMargin,
+            Math.hypot(p.x - tr.x, p.z - tr.z) - 6.1 * tr.s,
+          );
+    }
+    return { groundMargin, treeMargin };
+  };
+  addEventListener("resize", () => {
+    camera.aspect = innerWidth / innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth, innerHeight);
+    if (capture && window.__ready) window.__renderFrame(elapsed);
+  });
+  detail.textContent = "Compiling native WebGPU pipelines";
   await renderer.compileAsync(scene, camera);
+  renderer.compute(plants.compute);
+  await device.queue.onSubmittedWorkDone();
   render(cinematic ? 0 : 12);
-  await new Promise((r) => requestAnimationFrame(r));
+  await device.queue.onSubmittedWorkDone();
   render(cinematic ? 0 : 12);
-  renderer.getContext().finish();
+  await device.queue.onSubmittedWorkDone();
   window.__ready = true;
   document.body.classList.toggle("cinematic", cinematic);
-  document.querySelector("#loading").style.opacity = 0;
-  setTimeout(() => document.querySelector("#loading").remove(), 900);
+  loading.style.opacity = 0;
+  setTimeout(() => loading.remove(), 800);
+  console.info("Aurelia WebGPU ready", JSON.stringify(window.__sceneStats));
   if (!capture)
     renderer.setAnimationLoop((ms) => {
       const dt = last ? Math.min((ms - last) / 1000, 0.05) : 0;
@@ -185,10 +277,6 @@ try {
       elapsed += dt;
       render(elapsed, dt);
     });
-  console.info("Aurelia ready", vegetation.counts);
 } catch (error) {
-  console.error(error);
-  window.__errors.push(String(error));
-  document.querySelector("#load-detail").textContent =
-    "Could not enter the valley. " + error.message;
+  fail(error);
 }

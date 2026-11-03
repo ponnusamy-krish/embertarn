@@ -1,4 +1,4 @@
-import * as THREE from "three";
+import * as THREE from "three/webgpu";
 import { height } from "./math.js";
 const V = (a) => new THREE.Vector3(...a);
 // Adjacent shots share endpoints. Quintic easing brings velocity and acceleration to zero at edits.
@@ -52,7 +52,7 @@ const definitions = [
     ],
   ],
   [
-    "04 / THROUGH THE FIRS",
+    "04 / UNDER THE SPRUCES",
     38,
     [
       [-414, 29, 460],
@@ -68,7 +68,7 @@ const definitions = [
     ],
   ],
   [
-    "05 / THE HIGH COUNTRY",
+    "05 / THE FRACTURED RIDGE",
     38,
     [
       [-550, 38, 180],
@@ -156,10 +156,13 @@ export function tourPose(t) {
   );
   return { position, target, name: s.name };
 }
-const corridors = [];
-for (let t = 0; t < 300; t += 0.5) {
-  const p = tourPose(t).position;
-  if (p.y - height(p.x, p.z) < 40) corridors.push(p);
+let corridors = [];
+export function rebuildCorridors() {
+  corridors = [];
+  for (let t = 0; t < 300; t += 0.35) {
+    const p = tourPose(t).position;
+    if (p.y - height(p.x, p.z) < 55) corridors.push(p);
+  }
 }
 export function inCameraCorridor(x, z, r = 13) {
   return (

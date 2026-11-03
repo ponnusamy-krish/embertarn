@@ -1,88 +1,44 @@
-import * as THREE from "three";
-import {
-  EffectComposer,
-  RenderPass,
-  EffectPass,
-  NormalPass,
-  SSAOEffect,
-  BloomEffect,
-  SMAAEffect,
-  VignetteEffect,
-  ToneMappingEffect,
-  ToneMappingMode,
-  GodRaysEffect,
-  Effect,
-  EffectAttribute,
-  BlendFunction,
-} from "postprocessing";
-class AerialPerspective extends Effect {
-  constructor(camera) {
-    super(
-      "AerialPerspective",
-      `uniform mat4 invProjection;uniform mat4 cameraWorld;uniform vec3 eye;
- void mainImage(const in vec4 inputColor,const in vec2 uv,out vec4 outputColor){
- float depth=readDepth(uv);if(depth>=.999999){outputColor=inputColor;return;}
- vec4 view=invProjection*vec4(uv*2.-1.,depth*2.-1.,1.);view/=view.w;
- vec3 world=(cameraWorld*view).xyz;float distanceToEye=length(world-eye);
- float dh=(world.y-eye.y)/95.;float integral=exp(-max(eye.y-22.,0.)/95.)*(1.-exp(-dh))/((abs(dh)<.001)? .001:dh);
- if(abs(dh)<.001)integral=exp(-max(eye.y-22.,0.)/95.);
- float fog=1.-exp(-distanceToEye*(.000055+.00016*max(integral,0.)));
- vec3 fogColor=mix(vec3(.39,.48,.50),vec3(.69,.61,.46),.28);
- outputColor=vec4(mix(inputColor.rgb,fogColor,clamp(fog,0.,.78)),inputColor.a);
- }`,
-      {
-        attributes: EffectAttribute.DEPTH,
-        uniforms: new Map([
-          ["invProjection", new THREE.Uniform(camera.projectionMatrixInverse)],
-          ["cameraWorld", new THREE.Uniform(camera.matrixWorld)],
-          ["eye", new THREE.Uniform(camera.position)],
-        ]),
-      },
-    );
-  }
-}
-export function createPost(renderer, scene, camera, disk, capture) {
-  const composer = new EffectComposer(renderer, {
-    frameBufferType: THREE.HalfFloatType,
-    multisampling: 0,
-  });
-  composer.addPass(new RenderPass(scene, camera));
-  const normal = new NormalPass(scene, camera, { resolutionScale: 0.5 });
-  composer.addPass(normal);
-  const ao = new SSAOEffect(camera, normal.texture, {
-    blendFunction: BlendFunction.MULTIPLY,
-    samples: 9,
-    rings: 3,
-    distanceThreshold: 0.08,
-    distanceFalloff: 0.03,
-    rangeThreshold: 0.001,
-    rangeFalloff: 0.004,
-    radius: 0.018,
-    intensity: 0.55,
-    bias: 0.025,
-    resolutionScale: 0.5,
-  });
-  const aoPass = new EffectPass(camera, ao);
-  aoPass.enabled = true;
-  composer.addPass(aoPass);
-  const fog = new AerialPerspective(camera);
-  const bloom = new BloomEffect({
-    intensity: 0.15,
-    luminanceThreshold: 1.1,
-    mipmapBlur: true,
-  });
-  const rays = new GodRaysEffect(camera, disk, {
-    resolutionScale: 0.4,
-    density: 0.94,
-    decay: 0.94,
-    weight: 0.22,
-    exposure: 0.12,
-    samples: 32,
-    clampMax: 0.35,
-  });
-  composer.addPass(new EffectPass(camera, fog, bloom, rays));
-  const tone = new ToneMappingEffect({ mode: ToneMappingMode.ACES_FILMIC });
-  const vignette = new VignetteEffect({ offset: 0.22, darkness: 0.27 });
-  composer.addPass(new EffectPass(camera, tone, vignette, new SMAAEffect()));
-  return composer;
+﻿import * as THREE from "three/webgpu";
+import { pass, vec4, vec3, float, screenUV, renderOutput } from "three/tsl";
+import { ao } from "three/addons/tsl/display/GTAONode.js";
+import { bloom } from "three/addons/tsl/display/BloomNode.js";
+import { fxaa } from "three/addons/tsl/display/FXAANode.js";
+import { godrays } from "three/addons/tsl/display/GodraysNode.js";
+export function createPost(renderer, scene, camera, shaftSun, ultra) {
+  const pipeline = new THREE.RenderPipeline(renderer),
+    scenePass = pass(scene, camera);
+  scenePass.setResolutionScale(1);
+  const color = scenePass.getTextureNode("output"),
+    depth = scenePass.getTextureNode("depth");
+  const gtao = ao(depth, null, camera);
+  gtao.resolutionScale = 0.5;
+  gtao.radius.value = 3;
+  gtao.thickness.value = 2.5;
+  gtao.samples.value = ultra ? 16 : 8;
+  gtao.useTemporalFiltering = false;
+  const glow = bloom(color, 0.14, 0.5, 1.2);
+  const shafts = godrays(depth, camera, shaftSun);
+  shafts.resolutionScale = 0.25;
+  shafts.raymarchSteps.value = 20;
+  shafts.density.value = 0.035;
+  shafts.maxDensity.value = 0.06;
+  const vignette = float(1).sub(screenUV.sub(0.5).length().pow(2).mul(0.22));
+  const composite = vec4(
+    color.rgb
+      .mul(gtao.mul(0.45).add(0.55))
+      .add(glow.rgb)
+      .add(shafts.rgb.mul(0.12))
+      .mul(vignette),
+    1,
+  );
+  pipeline.outputColorTransform = false;
+  pipeline.outputNode = fxaa(renderOutput(composite));
+  return {
+    pipeline,
+    scenePass,
+    gtao,
+    render() {
+      pipeline.render();
+    },
+  };
 }
