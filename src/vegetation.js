@@ -15,7 +15,7 @@ import {
   float,
 } from "three/tsl";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { random, height, slope, lakeRadius, LAKE } from "./math.js";
+import { random, height, slope, lakeRadius, shoreDistance, LAKE } from "./math.js";
 import { inCameraCorridor } from "./cinematic.js";
 export function instances(scene, geo, mat, items, shadow = false) {
   const mesh = new THREE.InstancedMesh(geo, mat, items.length),
@@ -57,13 +57,9 @@ export async function createVegetation(scene, surfaces, manager, time) {
   }
   const boulders = [],
     pebbles = [];
-  for (let i = 0; i < 6500; i++) {
-    const a = rand() * Math.PI * 2,
-      r = 0.985 + rand() * 0.16,
-      x = Math.cos(a) * 470 * r,
-      z = Math.sin(a) * 700 * r,
-      y = height(x, z);
-    if (y < 20 || y > 34 || inCameraCorridor(x, z, 5)) continue;
+  for (let i = 0; i < 85000; i++) {
+    const x=(rand()-.5)*700,z=(rand()-.5)*1700,y=height(x,z),shore=shoreDistance(x,z);
+    if(shore < -18 || shore > 24 || inCameraCorridor(x,z,3)) continue;
     const scale = 0.12 + Math.pow(rand(), 4) * 2.1;
     pebbles.push({
       x,
@@ -76,10 +72,12 @@ export async function createVegetation(scene, surfaces, manager, time) {
       a: rand() * 6.28,
       color: new THREE.Color().setScalar(0.5 + rand() * 0.45),
     });
-    if (scale > 1.3 && boulders.length < 30)
+    if (scale > 1.3 && boulders.length < 180)
       boulders.push({ x, y: y - 0.5, z, s: scale * 1.3, a: rand() * 6.28 });
   }
   boulders.push(
+    {x:149,y:height(149,662)-.7,z:662,s:4.8,a:1.2},
+    {x:162,y:height(162,654)-.5,z:654,s:3.3,a:2.3},
     { x: -340, y: height(-340, 648) - 0.4, z: 648, s: 2.7, a: 0.8 },
     { x: -348, y: height(-348, 632) - 0.6, z: 632, s: 1.7, a: 2 },
   );
@@ -134,11 +132,13 @@ export async function createVegetation(scene, surfaces, manager, time) {
     { x: 385, y: height(385, 560), z: 560, s: 1.3, a: 2.4 },
   ]);
   const grass = [];
+  // Dense short sedges follow the measured wet margin.
+  for(let i=0;i<32000;i++){const x=(rand()-.5)*650,z=(rand()-.5)*1650,d=shoreDistance(x,z);if(d<1||d>8)continue;grass.push({x,y:height(x,z)-.03,z,s:.65+rand()*.8,a:rand()*6.28,color:new THREE.Color(0x777343)}); }
   for (let i = 0; i < 150000; i++) {
     const centers = [
-        [-330, 670],
-        [390, 570],
-        [-500, 350],
+        [155, 680],
+        [-220, 300],
+        [180, 200],
       ],
       c = centers[i % 3],
       spread = i % 3 === 2 ? 130 : 110,

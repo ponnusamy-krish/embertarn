@@ -1,8 +1,9 @@
+import {createFilm,filmPose,filmShots,filmAccumulator,halton,SHOT_DURATION} from "./film.js";
 import * as THREE from "three/webgpu";
 import { uniform } from "three/tsl";
 import { PointerLockControls } from "three/addons/controls/PointerLockControls.js";
 import "./style.css";
-import { height, generateHeightmap } from "./math.js";
+import { height, generateHeightmap, loadDEM } from "./math.js";
 import { loadSurfaces, createTerrain } from "./terrain.js";
 import { createForest } from "./forest.js";
 import { createVegetation } from "./vegetation.js";
@@ -13,7 +14,8 @@ import { updateTour, tourPose, rebuildCorridors } from "./cinematic.js";
 const params = new URLSearchParams(location.search),
   capture = params.get("capture") === "1",
   ultra = params.get("quality") === "ultra";
-let cinematic = params.get("cinematic") === "1";
+const filmEnabled=capture && params.get("film")==="1";
+let cinematic = params.get("cinematic") === "1" || filmEnabled;
 window.__ready = false;
 window.__errors = [];
 if (capture) document.body.classList.add("capture");
@@ -65,6 +67,7 @@ try {
     );
   window.__backend = {
     isWebGPUBackend: renderer.backend.isWebGPUBackend,
+    fallback:adapter.info.isFallbackAdapter??adapter.isFallbackAdapter??false,
     adapter: {
       vendor: adapter.info.vendor,
       architecture: adapter.info.architecture,
@@ -86,7 +89,7 @@ try {
   renderer.shadowMap.type = THREE.PCFShadowMap;
   const scene = new THREE.Scene(),
     camera = new THREE.PerspectiveCamera(
-      55,
+      46,
       innerWidth / innerHeight,
       0.35,
       14000,
@@ -94,10 +97,10 @@ try {
     clock = uniform(0);
   detail.textContent = "Eroding ridgelines and carving glacial channels";
   await new Promise((r) => setTimeout(r, 10));
-  generateHeightmap();
+  await loadDEM();
   rebuildCorridors();
-  camera.position.set(-330, height(-330, 670) + 4.5, 670);
-  camera.lookAt(0, 200, -800);
+  camera.position.set(155, height(155, 680) + 9, 680);
+  camera.lookAt(-150, 300, -2200);
   const manager = new THREE.LoadingManager();
   manager.onProgress = (_, n, total) => {
     document.querySelector("#progress").style.width =
@@ -112,7 +115,8 @@ try {
     loadSurfaces(manager),
     createSky(scene, renderer, manager, clock, ultra),
   ]);
-  const terrain = createTerrain(scene, surfaces);
+  const film=filmEnabled?createFilm(scene,clock):null;
+  const terrain = createTerrain(scene, surfaces,film);
   terrain.update(camera, ultra);
   const water = createWater(scene, clock, sky.direction, ultra);
   const forest = await createForest(scene, manager, clock);
@@ -123,10 +127,10 @@ try {
     ...forest.counts,
     ...plants.counts,
     terrainTiles: terrain.tiles.length,
-    heightmapResolution: 1025,
+    heightmapResolution: 2049,
     compute: "WebGPU grass wind + distance culling",
   };
-  const post = createPost(renderer, scene, camera, sky.shaftSun, ultra),
+  const post = createPost(renderer, scene, camera, sky.shaftSun, ultra,film),
     controls = new PointerLockControls(camera, canvas),
     keys = new Set();
   let elapsed = 0,
@@ -160,9 +164,10 @@ try {
   let shadowTick = -1;
   const shadowPosition = new THREE.Vector3(Infinity, Infinity, Infinity),
     shadowRotation = new THREE.Quaternion();
-  function render(t, dt = 0) {
+  function render(t, dt = 0, shotOverride) {
     clock.value = t;
-    if (cinematic)
+    if(film) film.update(camera,t,shotOverride);
+    else if (cinematic)
       document.querySelector("#shot-label").textContent = updateTour(
         camera,
         capture ? t : t - tourStart,
@@ -177,14 +182,14 @@ try {
       );
       camera.position.y +=
         (Number(keys.has("KeyE")) - Number(keys.has("KeyQ"))) * speed;
-      camera.position.x = THREE.MathUtils.clamp(camera.position.x, -2100, 2100);
-      camera.position.z = THREE.MathUtils.clamp(camera.position.z, -2100, 2100);
+      camera.position.x = THREE.MathUtils.clamp(camera.position.x, -4500, 4500);
+      camera.position.z = THREE.MathUtils.clamp(camera.position.z, -4500, 4500);
       camera.position.y = Math.max(
         camera.position.y,
         height(camera.position.x, camera.position.z) + 2.2,
         24.2,
       );
-      for (const tr of forest.trees) {
+      for (const tr of forest.nearby(camera.position.x,camera.position.z)) {
         const dx = camera.position.x - tr.x,
           dz = camera.position.z - tr.z,
           d = Math.hypot(dx, dz);
@@ -217,20 +222,35 @@ try {
     frames++;
     window.__renderedFrames = frames;
   }
-  window.__renderFrame = async (t) => {
-    if (!Number.isFinite(t) || t < 0)
-      throw Error("t must be finite nonnegative seconds");
-    elapsed = t;
-    window.__captureTime = t;
-    render(t);
-    await device.queue.onSubmittedWorkDone();
+  let accumulator;
+  device.lost.then(info=>{window.__deviceLost=info.message||info.reason;});
+  window.__filmShots=filmShots;
+  window.__renderFrame = async (t, options={}) => {
+    if(!Number.isFinite(t)||t<0)throw Error('t must be finite nonnegative seconds');
+    elapsed=t;window.__captureTime=t;
+    if(!film){render(t);await device.queue.onSubmittedWorkDone();return;}
+    const sub=options.sub??16,fps=options.fps??30;
+    if(!Number.isInteger(sub)||sub<1||sub>128||!Number.isFinite(fps)||fps<=0)throw Error('Invalid sampling options');
+    accumulator??=filmAccumulator(canvas);accumulator.reset();
+    const shotIndex=Math.min(44,Math.floor(t/SHOT_DURATION)),start=shotIndex*SHOT_DURATION,end=(shotIndex+1)*SHOT_DURATION;
+    for(let n=0;n<sub;n++){
+      // Centered 180-degree shutter. Clamp at hard cuts to prevent mixed-shot ghosts.
+      const st=Math.max(start,Math.min(end-1e-7,t+((n+.5)/sub-.5)*.5/fps));
+      camera.setViewOffset(innerWidth,innerHeight,halton(n+1,2)-.5,halton(n+1,3)-.5,innerWidth,innerHeight);
+      const fade=filmPose(st).fade;
+      render(st);accumulator.add((1-fade)/sub);await device.queue.onSubmittedWorkDone();
+      if(fade>0){render(st,0,shotIndex-1);accumulator.add(fade/sub);await device.queue.onSubmittedWorkDone();}
+      if(window.__deviceLost)throw Error('WebGPU device lost: '+window.__deviceLost);
+    }
+    camera.clearViewOffset();accumulator.finish();
   };
+  window.__framePNG=()=>accumulator.png();
   window.__setMode = (mode) => {
     cinematic = mode === "cinematic";
   };
   window.__cameraPosition = () => camera.position.toArray();
   window.__tourPose = (t) => {
-    const p = tourPose(t);
+    const p = film?filmPose(t):tourPose(t);
     return {
       position: p.position.toArray(),
       ground: height(p.position.x, p.position.z),
@@ -240,7 +260,7 @@ try {
     let groundMargin = Infinity,
       treeMargin = Infinity;
     for (let t = 0; t < 300; t += 0.25) {
-      const p = tourPose(t).position;
+      const p = (film?filmPose(t):tourPose(t)).position;
       groundMargin = Math.min(groundMargin, p.y - height(p.x, p.z));
       for (const tr of forest.trees)
         if (p.y < tr.y + 22 * tr.s && p.y > tr.y - 1)
@@ -269,7 +289,7 @@ try {
   document.body.classList.toggle("cinematic", cinematic);
   loading.style.opacity = 0;
   setTimeout(() => loading.remove(), 800);
-  console.info("Aurelia WebGPU ready", JSON.stringify(window.__sceneStats));
+  console.info("Embertarn WebGPU ready", JSON.stringify(window.__sceneStats));
   if (!capture)
     renderer.setAnimationLoop((ms) => {
       const dt = last ? Math.min((ms - last) / 1000, 0.05) : 0;

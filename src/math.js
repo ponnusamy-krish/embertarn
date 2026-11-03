@@ -56,130 +56,23 @@ export const smooth = (a, b, x) => {
   const t = Math.max(0, Math.min(1, (x - a) / (b - a)));
   return t * t * (3 - 2 * t);
 };
-export const LAKE = 22,
-  WORLD = 4608,
-  GRID = 1025,
-  CELL = WORLD / (GRID - 1);
-export function lakeRadius(x, z) {
-  return (
-    Math.hypot(x / 470, z / 700) +
-    (noise(x * 0.004 + 50, z * 0.004 + 50) - 0.5) * 0.18 +
-    Math.sin(Math.atan2(z, x) * 5) * 0.025
-  );
+export const LAKE=22,WORLD=10240,GRID=2049,CELL=WORLD/(GRID-1);
+let map,shore,biomes;
+export async function loadDEM(){
+ const paths=['terrain.f32','shore-distance.f32','biome.rgba'];
+ const data=await Promise.all(paths.map(async file=>{const r=await fetch('/assets/moraine-dem/'+file);if(!r.ok)throw Error('DEM '+r.status+' '+file);return r.arrayBuffer();}));
+ map=new Float32Array(data[0]);shore=new Float32Array(data[1]);biomes=new Uint8Array(data[2]);
+ // Sub-DEM surface detail, restrained so surveyed silhouettes stay intact.
+ for(let z=0;z<GRID;z++)for(let x=0;x<GRID;x++){const i=z*GRID+x,y=map[i];if(shore[i]>15){const wx=x*CELL-WORLD/2,wz=z*CELL-WORLD/2;map[i]+=(ridged(wx*.018+(noise(wx*.004,wz*.004)-.5)*2,wz*.018,5)-.4)*smooth(40,500,y)*26+(noise(wx*.23,wz*.23)-.5)*.5;}}
+ return map;
 }
-function geology(x, z) {
-  const r = lakeRadius(x, z),
-    shore = LAKE + (r - 1) * 62;
-  const wx = x + (fbm(x * 0.0013 + 10, z * 0.0013) - 0.48) * 290,
-    wz = z + (fbm(x * 0.0013, z * 0.0013 + 21) - 0.48) * 220;
-  // Intersecting, anisotropic ridge belts; no radial cone primitives.
-  const ridges = [
-    [-1000, -900, 0.32, 1020, 400, 740],
-    [150, -1550, -0.2, 1330, 530, 1030],
-    [1270, -700, 1.2, 1050, 440, 910],
-    [-1400, 580, 1.45, 1100, 470, 670],
-    [1470, 860, 0.9, 1150, 500, 640],
-    [-350, 1900, 0.2, 1200, 420, 590],
-  ];
-  let mass = 0;
-  for (let k = 0; k < ridges.length; k++) {
-    const [cx, cz, a, len, width, h] = ridges[k],
-      dx = wx - cx,
-      dz = wz - cz,
-      u = (dx * Math.cos(a) + dz * Math.sin(a)) / len,
-      v = (-dx * Math.sin(a) + dz * Math.cos(a)) / width;
-    const spine =
-      Math.exp(-Math.pow(Math.abs(v), 1.35)) *
-      Math.exp(-Math.pow(Math.abs(u), 4) * 1.5);
-    const crest = 0.82 + 0.25 * ridged(u * 2.0 + k * 13, v * 0.65 + k * 9, 4);
-    mass = Math.max(mass, h * spine * crest);
-  }
-  const mask = smooth(1.25, 2.2, r);
-  const fractured =
-    (ridged(wx * 0.0045, wz * 0.0045, 6) - 0.38) * (65 + mass * 0.19);
-  const gullies =
-    (1 - Math.abs(noise(wx * 0.009, wz * 0.0018) * 2 - 1)) *
-    Math.min(90, mass * 0.15);
-  const rock =
-    mass +
-    fractured -
-    gullies +
-    (ridged(wx * 0.026, wz * 0.019, 4) - 0.4) * 42 * smooth(120, 500, mass);
-  const stratum =
-    Math.sin((rock + wx * 0.07) * 0.085) * 9 * smooth(180, 550, rock);
-  return (
-    shore +
-    (rock + stratum) * mask +
-    (fbm(x * 0.018, z * 0.018, 4) - 0.46) * (2 + mask * 16)
-  );
-}
-let map;
-export function generateHeightmap() {
-  if (map) return map;
-  map = new Float32Array(GRID * GRID);
-  for (let z = 0; z < GRID; z++)
-    for (let x = 0; x < GRID; x++)
-      map[z * GRID + x] = geology(x * CELL - WORLD / 2, z * CELL - WORLD / 2);
-  // Deterministic downhill flow incision followed by conservative thermal transport.
-  const flow = new Float32Array(map.length);
-  flow.fill(1);
-  for (let pass = 0; pass < 9; pass++) {
-    const nextFlow = new Float32Array(map.length);
-    nextFlow.fill(1);
-    for (let z = 1; z < GRID - 1; z++)
-      for (let x = 1; x < GRID - 1; x++) {
-        const i = z * GRID + x;
-        if (map[i] < 65) continue;
-        let low = i;
-        for (const d of [-1, 1, -GRID, GRID])
-          if (map[i + d] < map[low]) low = i + d;
-        if (low !== i) {
-          const slope = (map[i] - map[low]) / CELL;
-          nextFlow[low] += Math.min(flow[i], 150);
-          map[i] -= Math.min(0.55, Math.log1p(flow[i]) * 0.035 * slope);
-        }
-      }
-    flow.set(nextFlow);
-  }
-  for (let pass = 0; pass < 5; pass++) {
-    const delta = new Float32Array(map.length);
-    for (let z = 1; z < GRID - 1; z++)
-      for (let x = 1; x < GRID - 1; x++) {
-        const i = z * GRID + x;
-        if (map[i] < 80) continue;
-        let low = i;
-        for (const d of [-1, 1, -GRID, GRID])
-          if (map[i + d] < map[low]) low = i + d;
-        const excess = map[i] - map[low] - CELL * 1.15;
-        if (excess > 0) {
-          const move = excess * 0.14;
-          delta[i] -= move;
-          delta[low] += move;
-        }
-      }
-    for (let i = 0; i < map.length; i++) map[i] += delta[i];
-  }
-  return map;
-}
-export function height(x, z) {
-  if (!map) return geology(x, z);
-  const fx = Math.max(0, Math.min(GRID - 1.001, (x + WORLD / 2) / CELL)),
-    fz = Math.max(0, Math.min(GRID - 1.001, (z + WORLD / 2) / CELL));
-  const ix = Math.floor(fx),
-    iz = Math.floor(fz),
-    u = fx - ix,
-    v = fz - iz,
-    i = iz * GRID + ix;
-  const base =
-    (map[i] * (1 - u) + map[i + 1] * u) * (1 - v) +
-    (map[i + GRID] * (1 - u) + map[i + GRID + 1] * u) * v;
-  return base + (noise(x * 0.23, z * 0.23) - 0.5) * 0.32 * smooth(23, 30, base);
-}
-export function slope(x, z) {
-  return (
-    Math.hypot(
-      height(x + 2, z) - height(x - 2, z),
-      height(x, z + 2) - height(x, z - 2),
-    ) / 4
-  );
-}
+export function generateHeightmap(){if(!map)throw Error('loadDEM must complete before terrain creation');return map;}
+function sample(data,x,z,size=GRID,channels=1,channel=0){const fx=Math.max(0,Math.min(size-1.001,(x/WORLD+.5)*(size-1))),fz=Math.max(0,Math.min(size-1.001,(z/WORLD+.5)*(size-1))),ix=Math.floor(fx),iz=Math.floor(fz),u=fx-ix,v=fz-iz,i=(iz*size+ix)*channels+channel;
+ return(data[i]*(1-u)+data[i+channels]*u)*(1-v)+(data[i+size*channels]*(1-u)+data[i+(size+1)*channels]*u)*v;}
+export function height(x,z){return map?sample(map,x,z):22;}
+export function shoreDistance(x,z){return shore?sample(shore,x,z):100;}
+export function lakeRadius(x,z){return 1+shoreDistance(x,z)/500;}
+export function biome(x,z){return [0,1,2,3].map(i=>sample(biomes,x,z,1025,4,i)/255);}
+export function slope(x,z){return Math.hypot(height(x+3,z)-height(x-3,z),height(x,z+3)-height(x,z-3))/6;}
+
+export function shorelineMap(){return shore;}

@@ -1,0 +1,18 @@
+[Unit]
+Description=Embertarn resumable WebGPU film render
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=render
+WorkingDirectory=/home/render/embertarn
+Environment=CHROME_BIN=/usr/bin/google-chrome
+ExecStart=/bin/bash /home/render/embertarn/scripts/vm_run.sh
+Restart=on-failure
+RestartSec=30
+TimeoutStopSec=45
+KillMode=control-group
+
+[Install]
+WantedBy=multi-user.target

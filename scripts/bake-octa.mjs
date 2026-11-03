@@ -1,0 +1,4 @@
+﻿import puppeteer from 'puppeteer';import fs from 'node:fs';import {execFileSync} from 'node:child_process';
+fs.mkdirSync('screenshots/octa-bake',{recursive:true});const browser=await puppeteer.launch({headless:true,args:['--enable-unsafe-webgpu','--ignore-gpu-blocklist','--use-angle=d3d11','--js-flags=--max-old-space-size=1536'],protocolTimeout:240000});
+try{const p=await browser.newPage();await p.setViewport({width:512,height:512});p.on('pageerror',e=>console.error(e));await p.goto('http://localhost:5173/scripts/bake-octa.html');await p.waitForFunction(()=>window.ready,{timeout:120000});for(const kind of ['albedo','normal'])for(let i=0;i<16;i++){await p.evaluate(([i,k])=>window.bake(i,k),[i,kind]);await p.screenshot({path:`screenshots/octa-bake/${kind}-${i}.png`,omitBackground:true});}console.log('32 octahedral views baked');}finally{await browser.close();}
+execFileSync('python',['scripts/assemble-octa.py'],{stdio:'inherit'});

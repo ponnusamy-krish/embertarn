@@ -1,70 +1,71 @@
-# Aurelia V2 — WebGPU alpine valley
+# Embertarn - An Alpine Golden Hour
 
-A local Vite / Three.js 0.187.0 world. All runtime assets are local CC0 files; no CDN is needed. The V1 source in `backup_v1_webgl/` is untouched.
+A native Three.js 0.187 WebGPU alpine world. Explore mode uses WASD/mouse, Q/E elevation, Shift speed and C for the 300-second cinematic. Run `npm install`, `npm run dev`, or `npm run build`. Hardware-accelerated Chrome/Edge and WebGPU are required.
 
-## Run
+V4 film capture and resumable cloud rendering are implemented in scripts/. Film effects apply only with `?capture=1&quality=ultra&film=1`. Existing explore behavior and both backups are preserved.
 
-```sh
-npm install
-npm run dev
+## Capture API
+
+Wait for `window.__ready`, then call `await window.__renderFrame(t, {sub:16,fps:30})` serially. Film mode averages deterministic subframes over a 180-degree shutter, with subpixel jitter and display-linear accumulation. `window.__framePNG()` returns the completed PNG as base64. Without film mode the original single-frame hook remains available.
+
+## Geographic and asset credits
+
+The terrain is derived from AWS Terrain Tiles around Moraine Lake / Valley of the Ten Peaks, Alberta, Canada. The water outline comes from OpenStreetMap way 356877446. Geographic names identify source data only, not the fictional Embertarn branding. See CREDITS.md for Canadian Open Government and ODbL attribution and CC0 Poly Haven art. Local bathymetry, elevation rebasing and rock detail are artistic reconstruction, not surveying data.
+
+## Remaining visual limits
+
+Synthetic cliff detail, repeated tree shapes and even shoreline blending remain visible. Film framing, atmospheric haze and photographic lens effects reduce these cues; they do not turn the scene into a real photograph.
+
+
+## V4 film and rendering
+
+Film mode cuts 300 seconds into 45 shots of 6.67 seconds. Six cuts have 0.65-second linear-light crossfades. The camera uses eased drift, deterministic low-amplitude shake and a small roll. Haze, moving low mist, sun glare, pollen, animated cloud shadows, warmer highlights/teal shadows, subtle radial distortion, chromatic aberration, grain and vignetting apply only in capture film mode. A small depth-dependent blur softens the water-detail shot; it is a restrained approximation rather than a physical bokeh lens. Explore mode retains its original render path.
+
+Each output frame averages N jittered subframes over a centered 180-degree shutter. Samples are clamped at hard cuts to avoid ghosts from the adjacent shot. Crossfade cameras render separately. Display-sRGB bytes are decoded to linear RGB, accumulated with Float32 precision and encoded once; this is post-tone-map linear accumulation, not an HDR exposure integrator. RAM use is independent of N. Grain, clouds, mist, water, vegetation and camera motion share absolute time. The GPU canvas must be copied before yielding to the browser compositor; the completed frame hook still awaits submitted GPU work.
+
+```powershell
 npm run build
-npm run preview
+node scripts/render.mjs --fps 30 --width 1920 --height 1080 --sub 16 --out frames
+node scripts/audio.mjs
+powershell -File scripts/encode.ps1 --title 1
 ```
 
-Open http://localhost:5173 in current Chrome or Edge with hardware acceleration. Native WebGPU is required; unsupported browsers show an explanation rather than silently falling back to WebGL. Use localhost or HTTPS, as WebGPU requires a secure context.
+Default output: 9,000 PNG frames, then output/alpine_lake_5min.mp4. The filename follows the requested delivery convention; the optional title card says **Embertarn**. Linux uses `bash scripts/encode.sh --title 1`. NVENC is tested by an actual encode before selection (CQ 18, preset p6); failure falls back to libx264 CRF 16/preset slow. Both produce H.264 High, yuv420p, 30 fps, AAC 320k and faststart. The last second fades to black. Audio is 300 seconds of original procedural wind, lapping water and bird-like chirps, with fades and two-pass loudness normalization; measured final loudness is approximately -16.17 LUFS.
 
-Click **Explore the valley** for pointer lock. WASD moves, Q/E moves vertically, Shift accelerates, Escape releases the mouse, and C toggles the cinematic tour.
+`--start` is an inclusive frame index; `--end` is exclusive, default 9000. `--sub 2` is the preview setting. `--segments 1:30,22:30,57:30` produces 90 contiguous output frames drawn from those three one-second timeline excerpts. Use a separate --out for preview and final.
 
-- `/?cinematic=1`: eight connected Catmull–Rom shots over 300 seconds: aerial, lake skim, shoreline dolly, forest, ridge reveal, orbit, meadow, pullback.
-- `/?capture=1&cinematic=1`: hide all UI and disable the animation loop.
-- Add `&quality=ultra` for 1.5 m near-terrain tessellation, 2048-pixel cascades, more AO samples and a 75%-resolution reflection. Default near tessellation is 2 m; reflection resolution is 40% per dimension.
+### Recovery rules
 
-```js
-// Wait for assets and initial GPU pipeline compilation.
-await new Promise(resolve => {
-  const id = setInterval(() => {
-    if (window.__ready) { clearInterval(id); resolve(); }
-  }, 100);
-});
-await window.__renderFrame(120);
+- Frames are PNG-decoded with CRC/dimension/nonblank checks before reuse. Partial files are never considered complete. A temp write is fsynced and renamed atomically. A corrupt completed PNG is regenerated.
+- manifest.json fingerprints the built dist contents, resolution, fps, shutter, samples and timeline. A changed build/configuration refuses to mix frames; use a new output directory. Range changes do not invalidate the manifest.
+- progress.json records total completed frames, skipped frames, effective fps, render seconds/frame and ETA. PNG files are authoritative if progress was interrupted.
+- Chrome restarts every 500 newly rendered frames (configurable --restart), and a failed frame/device loss receives up to four attempts with fresh browsers. Software adapters and WebGL fallback are rejected. Another renderer cannot own the same output directory.
+- Audio and video write temporary outputs and atomically promote validated results. Matching valid outputs are reused; encoding fingerprints frame bytes, audio and options.
+- vm_run.sh uses flock, appends status.log, resumes render/audio/encode, and writes DONE only after success. DONE makes subsequent runs a no-op. Remove DONE intentionally when starting a different delivery.
+- Keep the project, frames and output on a **persistent disk**. Spot preemption cannot preserve files stored on a deleted ephemeral/local SSD. Budget at least 40 GB free for lossless frames, assets and working files.
+
+## Ubuntu 22.04 Spot VM
+
+Upload/extract the archive onto a persistent disk, owned by an unprivileged render user. NVIDIA drivers must already be installed.
+
+```bash
+bash scripts/vm_setup.sh
+nohup bash scripts/vm_run.sh </dev/null >bootstrap.log 2>&1 &
+tail -f status.log
 ```
 
-The capture call accepts nonnegative seconds, updates camera/water/wind/sky/mist/birds from a single absolute time, renders the complete post pipeline, and awaits `GPUQueue.onSubmittedWorkDone()`. No temporal AA or history-dependent AO is used. Arbitrary seeks are supported. `window.__setMode('cinematic')` or `'explore'` changes the capture camera mode. The tour wraps at 300 seconds.
+Setup installs Node 22, Google Chrome stable/dependencies, FFmpeg, Vulkan libraries/tools and fonts; runs npm ci/build; prints nvidia-smi/vulkaninfo; and probes an actual hardware WebGPU render. It is safe to rerun. Normally rerun only vm_run.sh after a stop, preserving the same build and browser. CHROME_BIN defaults to /usr/bin/google-chrome on the VM. For boot-time resume, edit User/WorkingDirectory/ExecStart in scripts/embertarn.service, install it under /etc/systemd/system/, then `sudo systemctl daemon-reload` and `sudo systemctl enable --now embertarn.service`.
 
-`window.__backend`, `__sceneStats`, `__errors`, `__cameraPosition()` and `__tourCollisionCheck()` expose diagnostics.
+Linux Chrome flags include --enable-gpu, --enable-unsafe-webgpu, --enable-features=Vulkan,VulkanFromANGLE, --use-angle=vulkan and --ignore-gpu-blocklist. No display/Xvfb is assumed. These follow [Chromium's headless GPU guidance](https://chromium.googlesource.com/chromium/src.git/+/main/docs/gpu/using-gpu-hardware-in-headless-chrome.md). **Linux execution is not locally verified**: driver/ICD/sandbox configuration may require adjustment. The adapter probe fails loudly instead of accepting software rendering. CHROME_EXTRA_ARGS accepts a JSON array for explicit diagnostic overrides. Use an unprivileged user; CHROME_NO_SANDBOX=1 is an explicit isolated-root-container opt-in, never the default.
 
-## Rendering and world structure
+## Packaging
 
-- `main.js`: native `WebGPURenderer`, device/features, controls, deterministic frame API and lifecycle. There are no custom GLSL shaders, `ShaderMaterial`, `onBeforeCompile`, or pmndrs postprocessing dependencies.
-- `math.js`: seeded 4.608 km heightmap, 1025² samples, warped anisotropic ridge belts, ridged multi-octave detail, gullies and strata. Nine downhill-flow incision passes and five thermal transport passes run once on the CPU. This is a lightweight geological approximation, not a calibrated erosion simulation.
-- `terrain.js`: 144 tiles with cached 2/4/8 m geometric LOD (1.5 m near in ultra), skirts, height/slope splatting, triplanar rock projections, correctly oriented detail normals, macro/micro tiling, slope-aware snow, scree and a wet beach band. Textures pack roughness into the normal alpha channel to stay within WebGPU sampler limits.
-- `forest.js`: about 19,900 clustered, grounded trees, rejecting water, steep slopes and reserved tour corridors. Nearby trees use 3D branch-layer geometry; the four closest visible trees use optimized scanned mature-fir geometry. Medium crowns use volume meshes; beyond 520 m, crossed impostors use the original scan's baked lighting. Cell-based LOD and instancing limit draw cost. Simplified shadow proxies avoid repeatedly rasterizing millions of scanned needles.
-- `vegetation.js`: 142,500 grass blades, roughly 5,900 irregular shore stones, scanned boulders, ferns, saplings and logs. A native TSL compute kernel writes grass wind and distance-fade data to GPU storage buffers. Placement is seeded CPU work; compute culling collapses distant grass rather than using indirect draws.
-- `water.js`: native planar reflector node, two animated normal scales, Fresnel, refracted opaque-scene color, heightmap-derived optical depth/absorption, shoreline fading and small foam ripples. Reflections render the same grounded vegetation transforms as the main view.
-- `sky.js`: 4k sunset HDR cloud panorama and PMREM lighting, azimuth-aligned sun, three soft PCF CSM cascades following the camera, height/distance fog, moving mist and birds. The panorama drifts slowly from absolute time. Shadow maps refresh whenever the camera moves and at 6 Hz when stationary; capture always refreshes them.
-- `post.js`: native Three `RenderPipeline`, GTAO, restrained bloom, shadow-map god rays, FXAA, vignette, AgX tone mapping and sRGB output. No WebGL rendering path.
+`powershell -File scripts/pack.ps1` writes ../embertarn-upload.tar.gz. It excludes node_modules, dist, frames, output, screenshots, backups, .git, logs, DONE and runtime locks. The archive contains source and required scene assets; setup rebuilds dist. No commits or .gitignore edits are performed.
 
-## Verification
+## Local V4 verification
 
-Start the dev server, then run `npm run verify`. Puppeteer launches actual hardware WebGPU with `--enable-unsafe-webgpu --ignore-gpu-blocklist --use-angle=d3d11`; SwiftShader is not used. It records:
+Build passed after the corruption repair and film changes. Four film stills plus three look-review sheets are in screenshots/film/. Native NVIDIA Blackwell WebGPU, zero console/request/asset errors, deterministic out-of-order crossfade rendering and sampled camera clearance passed. `node scripts/verify-film.mjs` reproduces the checks.
 
-- Native `renderer.backend.isWebGPUBackend === true` and adapter information.
-- Readiness, browser/validation errors and failed HTTP requests.
-- Six 1920×1080 screenshots: explore and cinematic at 20, 60, 120, 200 and 280 seconds.
-- Exact PNG repeatability after seeking 120 → 20 → 120.
-- Tour terrain/canopy clearance sampled every 0.25 seconds, pointer lock, W movement and C mode switching.
-- Default-view, moving-camera and aerial-tour FPS, plus ultra-mode readiness and the unsupported-WebGPU message.
+The forced-stop test killed the entire owned Node/Chrome tree after five completed frames, resumed unchanged frames, regenerated a deliberately corrupt PNG and finished 90/90. `scripts/test-resume.mjs` requires a fresh frames/preview directory to repeat that destructive test. output/preview_test.mp4 is exactly 3.000 seconds, 90 frames, 1920x1080/30fps H.264 High/yuv420p with AAC stereo audio. Audio and encode reruns correctly skipped valid outputs.
 
-The final run reported 98.4 fps at the default viewpoint, 68.2 fps while flying, and 149.2 fps during the opening aerial shot at 1920?1080. All 51 manifest entries passed local MD5 checks. Results are in `screenshots/verification.json`. Performance numbers are short headless measurements on the local NVIDIA GeForce RTX 5060 Ti, not a guarantee across the entire tour or other machines. `ITERATION=N` saves a separate visual-review set; `FAST=1` skips performance and auxiliary mode checks.
-
-Nine visual review passes were made. They corrected stretched wind coordinates, lifted tree roots, LOD cracks, excess haze, broad procedural cloud blobs, sparse forests, overly simplified fir needles, cliff-normal orientation and shadow cost. Early iteration captures are retained as QA evidence. Real Dolomite lake photographs were used only for visual comparison, not as shipped assets.
-
-## Assets and regeneration
-
-`public/` is approximately 212 MiB (222 MB), below the 400 MB limit. See `CREDITS.md` and the checksum manifest. V2 adds Rock Face 03, Aerial Rocks 04, Industrial Sunset 02 PureSky and an optimized mature Fir Tree 01 GLB. Original V1 CC0 surfaces and small glTF scans remain available.
-
-`download-assets.mjs`, `download-v2-assets.mjs` and `download-sky.mjs` fetch their respective source files from the Poly Haven API and validate MD5s. `optimize-fir.mjs` downloads the original fir into a temporary directory under `scripts/`, selects one tree, welds/simplifies it and exports the GLB; the 478 MB temporary source is removed afterward. The existing distant-tree PNGs retain their V1 source attribution.
-
-## Remaining visual limitations
-
-This is still an approximation of photographic scenery. Distant crossed-tree silhouettes and LOD changes can be noticeable; procedural mid-distance branches are more regular than scanned trees. Cliff silhouettes retain heightfield smoothness, and the snow mask is procedural. Water uses a single planar surface and terrain-derived depth, without wave geometry, underwater caustics or participating-media scattering. The distant forest's baked lighting cannot respond exactly like nearby PBR meshes. Cloud motion rotates a photographed panorama instead of simulating volumetric clouds.
+Local RTX 5060 Ti sub-16 capture averaged **0.762 seconds/frame**, including PNG transfer, decoding, fsync and saving, across eight frames at four viewpoints. The API-only four-view mean was 0.727 seconds. At local speed 9000 frames take about 1.9 hours plus browser startup, crossfades and encoding. VM speed is unmeasured; stronger GPU performance does not eliminate CPU readback/PNG overhead. Shell syntax was checked with Bash; Linux package installation and GPU flags still need the supplied VM probe.

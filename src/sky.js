@@ -16,16 +16,17 @@ import {
 import { HDRLoader } from "three/addons/loaders/HDRLoader.js";
 import { CSMShadowNode } from "three/addons/csm/CSMShadowNode.js";
 
+import { SkyMesh } from './AtmosphereSky.js';
 import { random, LAKE } from "./math.js";
 export async function createSky(scene, renderer, manager, time, ultra) {
   const hdr = await new HDRLoader(manager).loadAsync(
-    "/assets/industrial_sunset_02_puresky.hdr",
+    "/assets/table_mountain_2_puresky.hdr",
   );
   hdr.mapping = THREE.EquirectangularReflectionMapping;
   const pmrem = new THREE.PMREMGenerator(renderer);
   scene.environment = pmrem.fromEquirectangular(hdr).texture;
-  scene.environmentIntensity = 0.45;
-  const direction = new THREE.Vector3(-0.85, 0.22, 0.48).normalize();
+  scene.environmentIntensity = 0.32;
+  const direction = new THREE.Vector3(-.815,.087,.565).normalize();
   // Rotate the HDR environment so its brightest source agrees with the analytic sky sun.
   const { data, width, height } = hdr.image;
   let peak = 0,
@@ -46,26 +47,28 @@ export async function createSky(scene, renderer, manager, time, ultra) {
     (bx / width - 0.5) * Math.PI * 2 - Math.atan2(direction.z, direction.x);
   pmrem.dispose();
   scene.background = hdr;
+ const sky=new SkyMesh(time);sky.scale.setScalar(24000);sky.sunPosition.value.copy(direction).multiplyScalar(10000);sky.turbidity.value=2.2;sky.rayleigh.value=1.35;sky.mieCoefficient.value=.004;sky.mieDirectionalG.value=.86;sky.cloudScale.value=.003;sky.cloudCoverage.value=.18;sky.cloudDensity.value=.25;sky.cloudElevation.value=.38;sky.cloudSpeed.value=.000004;const analytic=new URLSearchParams(location.search).get('sky')==='analytic';if(analytic){scene.background=null;scene.add(sky);}
+ 
   scene.backgroundRotation.copy(scene.environmentRotation);
-  scene.backgroundIntensity = 0.8;
-  const sun = new THREE.DirectionalLight(0xffe3bd, 3.2);
+  scene.backgroundIntensity = 0.65;
+  const sun = new THREE.DirectionalLight(0xffaa67, 6.5);
   sun.position.copy(direction).multiplyScalar(1600);
   sun.castShadow = true;
   sun.shadow.mapSize.set(ultra ? 2048 : 1024, ultra ? 2048 : 1024);
   sun.shadow.bias = -0.00015;
   sun.shadow.normalBias = 0.65;
   sun.shadow.radius = 2;
-  sun.shadow.camera.far = 3500;
+  sun.shadow.camera.far = 8500;
   const csm = new CSMShadowNode(sun, {
     cascades: 3,
-    maxFar: 1600,
+    maxFar: 2500,
     mode: "practical",
-    lightMargin: 900,
+    lightMargin: 3300,
   });
   csm.fade = true;
   sun.shadow.shadowNode = csm;
   scene.add(sun, sun.target);
-  scene.add(new THREE.HemisphereLight(0xa3bdcf, 0x564632, 0.45));
+  scene.add(new THREE.HemisphereLight(0x9ac5ff, 0x29291e, 0.24));
   const shaftSun = new THREE.DirectionalLight(0xffc78d, 0.015);
   shaftSun.castShadow = true;
   shaftSun.position.copy(direction).multiplyScalar(1400);
@@ -83,12 +86,12 @@ export async function createSky(scene, renderer, manager, time, ultra) {
   const d = positionView.z.negate(),
     low = positionWorld.y.sub(LAKE).max(0).mul(-0.009).exp();
   const aerial = d
-    .mul(0.000025)
-    .add(d.mul(0.000035).mul(low))
+    .mul(0.000022)
+    .add(d.mul(0.000015).mul(low))
     .negate()
     .exp()
     .oneMinus();
-  scene.fogNode = fog(vec3(0.48, 0.56, 0.6), aerial.clamp(0, 0.65));
+  scene.fogNode = fog(vec3(0.18, 0.27, 0.42), aerial.clamp(0, 0.65));
   const mistMat = new THREE.MeshBasicNodeMaterial({
     transparent: true,
     depthWrite: false,
@@ -103,7 +106,7 @@ export async function createSky(scene, renderer, manager, time, ultra) {
   mistMat.colorNode = vec3(0.64, 0.69, 0.62);
   mistMat.opacityNode = smoothstep(0.4, 0.75, mist)
     .mul(smoothstep(0.25, 0.5, uv().sub(0.5).length()).oneMinus())
-    .mul(0.085);
+    .mul(0.022);
   const mistPlane = new THREE.Mesh(new THREE.PlaneGeometry(850, 1300), mistMat);
   mistPlane.rotation.x = -Math.PI / 2;
   mistPlane.position.y = 25;
@@ -139,7 +142,8 @@ export async function createSky(scene, renderer, manager, time, ultra) {
     shaftSun,
     direction,
     update(t, camera) {
-      scene.backgroundRotation.y = scene.environmentRotation.y + t * 0.000006;
+      sky.position.copy(camera.position);
+      scene.backgroundRotation.y=scene.environmentRotation.y+t*.000015;
       birds.forEach((b, i) => {
         const a = t * 0.032 + b.phase;
         b.mesh.position.set(

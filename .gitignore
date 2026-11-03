@@ -1,0 +1,13 @@
+﻿node_modules/
+dist/
+*.log
+frames/
+output/
+backup_v1_webgl/
+backup_v2_webgpu/
+screenshots/reference/
+screenshots/iteration-*/
+progress.json
+status.log
+DONE
+*.tar.gz

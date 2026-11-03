@@ -1,0 +1,46 @@
+{
+  "backend": {
+    "isWebGPUBackend": true,
+    "fallback": false,
+    "adapter": {
+      "vendor": "nvidia",
+      "architecture": "blackwell",
+      "device": "",
+      "description": ""
+    }
+  },
+  "errors": [],
+  "assetErrors": [],
+  "deterministicCrossfade": true,
+  "clearance": {
+    "groundMargin": 8.463771614640809,
+    "treeMargin": 83.15696978573322
+  },
+  "sub16At1080p": [
+    {
+      "time": 1,
+      "seconds": 0.7281965
+    },
+    {
+      "time": 22,
+      "seconds": 0.6737515999999996
+    },
+    {
+      "time": 37,
+      "seconds": 0.8267965999999997
+    },
+    {
+      "time": 57,
+      "seconds": 0.6775375000000003
+    }
+  ],
+  "meanSeconds": 0.7265705499999999,
+  "pipelineSub16": {
+    "frames": 8,
+    "secondsPerFrame": 0.7618824124999998,
+    "width": 1920,
+    "height": 1080,
+    "includes": "PNG transfer, decode, atomic fsync and write; excludes browser startup",
+    "skipAllRerun": 8
+  }
+}

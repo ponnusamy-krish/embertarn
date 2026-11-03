@@ -1,0 +1,9 @@
+{
+  "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/fir_tree_01/fir_tree_01_1k.gltf",
+  "license": "CC0-1.0",
+  "authors": [
+    "Rob Tuytel",
+    "Rico Cilliers"
+  ],
+  "processing": "First tree; weld and meshoptimizer simplify ratio 0.18 error 0.002; original 1k PBR maps"
+}

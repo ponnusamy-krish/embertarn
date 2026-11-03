@@ -1,0 +1,7 @@
+{
+  "source": "Poly Haven Fir Tree 01, optimized mature mesh",
+  "license": "CC0-1.0",
+  "layout": "4x4 hemi-octahedral views, orthographic 16m x 28m, root-normalized tree 22m high",
+  "normalSpace": "object/world space, linear RGB",
+  "viewCenterHeight": 11
+}

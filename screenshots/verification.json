@@ -1,0 +1,47 @@
+{
+  "errors": [],
+  "failed": [],
+  "backend": {
+    "isWebGPUBackend": true,
+    "adapter": {
+      "vendor": "nvidia",
+      "architecture": "blackwell",
+      "device": "",
+      "description": ""
+    }
+  },
+  "ready": true,
+  "scene": {
+    "trees": 151381,
+    "forestChunks": 306,
+    "scannedTreeLOD": 6,
+    "octahedralViews": 16,
+    "grass": 74173,
+    "pebbles": 9731,
+    "boulders": 184,
+    "ferns": 150,
+    "terrainTiles": 256,
+    "heightmapResolution": 2049,
+    "compute": "WebGPU grass wind + distance culling"
+  },
+  "clearance": {
+    "groundMargin": 2.299999999999997,
+    "treeMargin": 5.698262782850433
+  },
+  "assetErrors": [],
+  "deterministic": true,
+  "performance": {
+    "fps": 89.78383890899387,
+    "width": 1920,
+    "height": 1080,
+    "flyFps": 53.643641165307,
+    "controlsMovedMetres": 23.889999999999766,
+    "cinematicFps": 65.59475241980763
+  },
+  "ultra": {
+    "ready": true,
+    "backend": true,
+    "errors": []
+  },
+  "unavailableMessage": true
+}
