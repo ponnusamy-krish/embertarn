@@ -1,0 +1,11 @@
+{
+  "valid_frames": 24,
+  "preserved_sha256": {
+    "f_000163.png": "ca6862e7264fedbab1d6a90b4980f5c59e9c910832c79de89733bacbd85a0afb",
+    "f_000160.png": "68d1dd97fe44cfbc83e41ecbc766612b043ebc79c7e28a766d17d3970a189659",
+    "f_000162.png": "dbf73350de991bf27dcfa9fdd673e80cd6193b6c91bc9f2453aab8555bc225ea",
+    "f_000161.png": "472c18f82267b114fcc6c10f0d9124771ea9e3365e77ace67b5311ae7788143f"
+  },
+  "interruption": "SIGKILL of the owned Blender process after four complete frames",
+  "resume_verified": true
+}

@@ -1,0 +1,11 @@
+{
+  "updated": 1793735452.5150585,
+  "last": 571,
+  "rendered_this_run": 12,
+  "skipped_this_run": 0,
+  "mean_seconds": 4.2246953188333505,
+  "frame_seconds": 3.9948763750001035,
+  "engine": "CYCLES",
+  "samples": 64,
+  "remaining_range": 0
+}

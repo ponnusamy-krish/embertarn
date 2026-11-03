@@ -1,0 +1,1 @@
+{"workers": 3, "threads": 16, "reuse_engine": true, "camera_only_blur": true, "compression": 0, "persistent": true, "denoiser": "OPTIX", "adaptive_threshold": 0.045, "adaptive_min_samples": 8, "max_bounces": 6, "diffuse_bounces": 2, "glossy_bounces": 3, "transmission_bounces": 6, "tile_size": 2048}

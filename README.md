@@ -69,3 +69,8 @@ Build passed after the corruption repair and film changes. Four film stills plus
 The forced-stop test killed the entire owned Node/Chrome tree after five completed frames, resumed unchanged frames, regenerated a deliberately corrupt PNG and finished 90/90. `scripts/test-resume.mjs` requires a fresh frames/preview directory to repeat that destructive test. output/preview_test.mp4 is exactly 3.000 seconds, 90 frames, 1920x1080/30fps H.264 High/yuv420p with AAC stereo audio. Audio and encode reruns correctly skipped valid outputs.
 
 Local RTX 5060 Ti sub-16 capture averaged **0.762 seconds/frame**, including PNG transfer, decoding, fsync and saving, across eight frames at four viewpoints. The API-only four-view mean was 0.727 seconds. At local speed 9000 frames take about 1.9 hours plus browser startup, crossfades and encoding. VM speed is unmeasured; stronger GPU performance does not eliminate CPU readback/PNG overhead. Shell syntax was checked with Bash; Linux package installation and GPU flags still need the supplied VM probe.
+
+## Embertarn Blender film pipeline
+
+The independent [Blender pipeline](blender/README.md) uses Blender 5.2.2, Cycles OptiX, CC0 scans and the existing attributed DEM. Heavy builds and verification run on the cloud VM. Full video rendering is gated on approval of the stills; the interactive web application is unchanged.
+

@@ -42,3 +42,28 @@ Three.js and its WebGPU/TSL examples are MIT-licensed software, not art assets. 
 ## Embertarn film audio (V4)
 
 The 300-second stereo wind, shore wash and sparse bird-like chirps are original procedural synthesis in scripts/audio.mjs, dedicated to CC0 1.0 by this project. No third-party audio samples, Freesound/API assets, Pixabay tracks or recordings are used. The source is continuous rather than looped, so there are no loop joins to crossfade. FFmpeg performs fades and two-pass EBU R128 loudness normalization to -16 LUFS / -1.5 dBTP. Procedural chirps are an artistic approximation, not field recordings.
+
+<!-- EMBERTARN_BLENDER_ASSETS -->
+
+## Embertarn Blender V5 CC0 assets
+
+- **Rock Face 03** — Dario Barresi, Rico Cilliers — https://polyhaven.com/a/rock_face_03 — CC0 1.0.
+- **Rock Face** — Greg Zaal, Dario Barresi — https://polyhaven.com/a/rock_face — CC0 1.0.
+- **Aerial Rocks 04** — Rob Tuytel — https://polyhaven.com/a/aerial_rocks_04 — CC0 1.0.
+- **Grass Ground** — Charlotte Baglioni — https://polyhaven.com/a/grass_ground — CC0 1.0.
+- **Forest Ground 04** — Rob Tuytel, Rico Cilliers — https://polyhaven.com/a/forest_ground_04 — CC0 1.0.
+- **Snow 02** — Rob Tuytel — https://polyhaven.com/a/snow_02 — CC0 1.0.
+- **Dry River Pebbles** — Amal Kumar — https://polyhaven.com/a/dry_river_pebbles — CC0 1.0.
+- **Forest Floor** — eye-candy.xyz — https://polyhaven.com/a/forest_floor — CC0 1.0.
+- **Forest Leaves 02** — Rob Tuytel — https://polyhaven.com/a/forest_leaves_02 — CC0 1.0.
+- **Fir Tree 01** — Rob Tuytel, Rico Cilliers — https://polyhaven.com/a/fir_tree_01 — CC0 1.0.
+- **Pine Sapling Medium** — Rob Tuytel, Rico Cilliers — https://polyhaven.com/a/pine_sapling_medium — CC0 1.0.
+- **Boulder 01** — Rico Cilliers — https://polyhaven.com/a/boulder_01 — CC0 1.0.
+- **Namaqualand Boulder 02** — Greg Zaal, Rico Cilliers — https://polyhaven.com/a/namaqualand_boulder_02 — CC0 1.0.
+- **Fern 02** — Rob Tuytel, Rico Cilliers — https://polyhaven.com/a/fern_02 — CC0 1.0.
+- **Grass Medium 01** — Rob Tuytel, Rico Cilliers — https://polyhaven.com/a/grass_medium_01 — CC0 1.0.
+- **Dead Tree Trunk** — Rob Tuytel — https://polyhaven.com/a/dead_tree_trunk — CC0 1.0.
+- **Table Mountain 2 (Pure Sky)** — Greg Zaal, Jarod Guest — https://polyhaven.com/a/table_mountain_2_puresky — CC0 1.0.
+
+Downloads are checksum-verified via the Poly Haven API; Blender-local assets/metadata and assets/manifest.json retain provenance. Geometry simplification and procedural variants derive from these CC0 sources. Geographic DEM/OSM attribution remains as listed above.
+<!-- /EMBERTARN_BLENDER_ASSETS -->

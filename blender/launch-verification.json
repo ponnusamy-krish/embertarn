@@ -1,0 +1,8 @@
+{
+  "first_30_valid": true,
+  "service": "active",
+  "boot": "enabled",
+  "started": "Tue 2026-11-03 20:08:45 UTC",
+  "status": "57/7200 | 2265 frames/hour recent | ETA 3h09m | workers 3 | DONE no | last error: none",
+  "engine": "CYCLES"
+}

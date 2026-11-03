@@ -1,0 +1,3926 @@
+{
+  "adaptive": {
+    "config": {
+      "compression": 0,
+      "adaptive_threshold": 0.06,
+      "adaptive_min_samples": 8,
+      "reuse_engine": true
+    },
+    "workers": 1,
+    "frames": 6,
+    "wall_seconds": 24.220202486000062,
+    "frames_hour_including_startup": 891.8174822231725,
+    "exit_codes": [
+      0
+    ],
+    "timings": [
+      {
+        "frame": 80,
+        "seconds": 4.71378793100007,
+        "evaluation": 0.001264139999989311,
+        "render": 4.503833533000034,
+        "save": 0.1886313989999735,
+        "validation": 0.0316702580000765,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 81,
+        "seconds": 3.2370946380000305,
+        "evaluation": 0.0006856500000367305,
+        "render": 3.087231877000022,
+        "save": 0.12895612299996628,
+        "validation": 0.04140485699997498,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 82,
+        "seconds": 3.1810721620000777,
+        "evaluation": 0.000711700000010751,
+        "render": 3.0339118499999813,
+        "save": 0.1249774330000264,
+        "validation": 0.05370952700002363,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 560,
+        "seconds": 3.5633476589999873,
+        "evaluation": 0.007942269000068336,
+        "render": 3.3953815589999294,
+        "save": 0.13908886199999415,
+        "validation": 0.062409566000042105,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 561,
+        "seconds": 3.2565153279999777,
+        "evaluation": 0.0007251000000678687,
+        "render": 3.1117681359999096,
+        "save": 0.12360035300002892,
+        "validation": 0.07176681600003576,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 562,
+        "seconds": 3.2471747870000627,
+        "evaluation": 0.0007701700000097844,
+        "render": 3.1064544260000275,
+        "save": 0.11826162299996668,
+        "validation": 0.08313037499999609,
+        "engine": "CYCLES",
+        "samples": 64
+      }
+    ],
+    "mean_seconds": 3.5331654175000344,
+    "stage_means": {
+      "evaluation": 0.002016504833363797,
+      "render": 3.3730968968333173,
+      "save": 0.1372526321666593,
+      "validation": 0.057348566500024845
+    },
+    "diffs": {
+      "80": {
+        "mae": 0.0018236039904877543,
+        "rmse": 0.0036927934270352125,
+        "p99": 0.0156862735748291,
+        "max": 0.16470590233802795
+      },
+      "560": {
+        "mae": 0.001693004509434104,
+        "rmse": 0.010317300446331501,
+        "p99": 0.027450978755950928,
+        "max": 0.6823529601097107
+      }
+    },
+    "telemetry_summary": {
+      "mean_gpu_percent": 17.714285714285715,
+      "peak_gpu_percent": 99.0,
+      "peak_vram_mib": 8818.0,
+      "mean_cpu_percent_all_48_vcpus": 5.494099816987335
+    },
+    "cycles_stages": [
+      {
+        "frame": 80,
+        "scene_sync_seconds": 1.78349,
+        "path_trace_seconds": 0.704519,
+        "denoise_seconds": 0.014542,
+        "bvh_submission_span_seconds": 0.26200000000000045,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 81,
+        "scene_sync_seconds": 1.70904,
+        "path_trace_seconds": 0.700368,
+        "denoise_seconds": 0.005919,
+        "bvh_submission_span_seconds": 0.04100000000000037,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 82,
+        "scene_sync_seconds": 1.68448,
+        "path_trace_seconds": 0.708847,
+        "denoise_seconds": 0.005972,
+        "bvh_submission_span_seconds": 0.04100000000000037,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 560,
+        "scene_sync_seconds": 1.73206,
+        "path_trace_seconds": 0.722269,
+        "denoise_seconds": 0.005977,
+        "bvh_submission_span_seconds": 0.24400000000000155,
+        "bvh_submissions": 259
+      },
+      {
+        "frame": 561,
+        "scene_sync_seconds": 1.69679,
+        "path_trace_seconds": 0.736893,
+        "denoise_seconds": 0.006184,
+        "bvh_submission_span_seconds": 0.045999999999999375,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 562,
+        "scene_sync_seconds": 1.73533,
+        "path_trace_seconds": 0.734926,
+        "denoise_seconds": 0.005987,
+        "bvh_submission_span_seconds": 0.04200000000000159,
+        "bvh_submissions": 2
+      }
+    ],
+    "profiling_note": "Cycles logs provide synchronization/path/denoise durations. BVH submission span is timestamped first-to-last OptiX BVH submission, not an isolated GPU timer; device upload/setup overlaps and is included in total render duration."
+  },
+  "baseline": {
+    "config": {},
+    "workers": 1,
+    "frames": 6,
+    "wall_seconds": 34.06369522099999,
+    "frames_hour_including_startup": 634.1061901787971,
+    "exit_codes": [
+      0
+    ],
+    "timings": [
+      {
+        "frame": 80,
+        "seconds": 5.021502054999985,
+        "evaluation": 0.0013381699999968077,
+        "render": 4.542112216000021,
+        "save": 0.40817003299997623,
+        "validation": 0.13099879200001396,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 81,
+        "seconds": 5.268711338000003,
+        "evaluation": 0.2857099510000012,
+        "render": 4.563975824000011,
+        "save": 0.35423219699998754,
+        "validation": 0.18537630800000215,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 82,
+        "seconds": 4.946060649000003,
+        "evaluation": 0.2749165719999951,
+        "render": 4.2497627049999664,
+        "save": 0.3528642770000374,
+        "validation": 0.2484752139999955,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 560,
+        "seconds": 4.933961179999983,
+        "evaluation": 0.2963491610000233,
+        "render": 4.205049006999957,
+        "save": 0.35904002700004867,
+        "validation": 0.3132933689999504,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 561,
+        "seconds": 4.939764930000024,
+        "evaluation": 0.2743055430000254,
+        "render": 4.232142024999973,
+        "save": 0.36231434699999454,
+        "validation": 0.3736031860000253,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 562,
+        "seconds": 4.897481072000005,
+        "evaluation": 0.2894695609999758,
+        "render": 4.180799379000007,
+        "save": 0.3567133070000068,
+        "validation": 0.4355329609999785,
+        "engine": "CYCLES",
+        "samples": 64
+      }
+    ],
+    "mean_seconds": 5.001246870666667,
+    "stage_means": {
+      "evaluation": 0.23701482633333626,
+      "render": 4.328973525999989,
+      "save": 0.36555569800000853,
+      "validation": 0.2812133049999943
+    },
+    "diffs": {
+      "80": {
+        "mae": 0.0,
+        "rmse": 0.0,
+        "p99": 0.0,
+        "max": 0.0
+      },
+      "560": {
+        "mae": 0.0,
+        "rmse": 0.0,
+        "p99": 0.0,
+        "max": 0.0
+      }
+    },
+    "telemetry_summary": {
+      "mean_gpu_percent": 17.205607476635514,
+      "peak_gpu_percent": 99.0,
+      "peak_vram_mib": 8740.0,
+      "mean_cpu_percent_all_48_vcpus": 7.656838764486315
+    },
+    "cycles_stages": [
+      {
+        "frame": 80,
+        "scene_sync_seconds": 1.76412,
+        "path_trace_seconds": 0.812011,
+        "denoise_seconds": 0.01503,
+        "bvh_submission_span_seconds": 0.2629999999999999,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 81,
+        "scene_sync_seconds": 1.77545,
+        "path_trace_seconds": 0.892164,
+        "denoise_seconds": 0.013356,
+        "bvh_submission_span_seconds": 0.26500000000000057,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 82,
+        "scene_sync_seconds": 1.76232,
+        "path_trace_seconds": 0.804039,
+        "denoise_seconds": 0.014066,
+        "bvh_submission_span_seconds": 0.261000000000001,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 560,
+        "scene_sync_seconds": 1.78737,
+        "path_trace_seconds": 0.762312,
+        "denoise_seconds": 0.013449,
+        "bvh_submission_span_seconds": 0.26500000000000057,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 561,
+        "scene_sync_seconds": 1.76711,
+        "path_trace_seconds": 0.775458,
+        "denoise_seconds": 0.013386,
+        "bvh_submission_span_seconds": 0.2680000000000007,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 562,
+        "scene_sync_seconds": 1.76317,
+        "path_trace_seconds": 0.765588,
+        "denoise_seconds": 0.013475,
+        "bvh_submission_span_seconds": 0.26099999999999923,
+        "bvh_submissions": 271
+      }
+    ],
+    "profiling_note": "Cycles logs provide synchronization/path/denoise durations. BVH submission span is timestamped first-to-last OptiX BVH submission, not an isolated GPU timer; device upload/setup overlaps and is included in total render duration."
+  },
+  "bounces": {
+    "config": {
+      "compression": 0,
+      "max_bounces": 4,
+      "glossy_bounces": 2,
+      "transmission_bounces": 4,
+      "reuse_engine": true
+    },
+    "workers": 1,
+    "frames": 6,
+    "wall_seconds": 24.55535467300001,
+    "frames_hour_including_startup": 879.6452051963399,
+    "exit_codes": [
+      0
+    ],
+    "timings": [
+      {
+        "frame": 80,
+        "seconds": 4.832307713999967,
+        "evaluation": 0.0013786499999923763,
+        "render": 4.624085386000047,
+        "save": 0.18524508899997727,
+        "validation": 0.0327793980000024,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 81,
+        "seconds": 3.335086402999991,
+        "evaluation": 0.0006987799999933486,
+        "render": 3.188681871999961,
+        "save": 0.12672714200004975,
+        "validation": 0.04049151799995343,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 82,
+        "seconds": 3.275447225999983,
+        "evaluation": 0.0007774599999947895,
+        "render": 3.1338880340000514,
+        "save": 0.12130904299999656,
+        "validation": 0.05101604699996187,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 560,
+        "seconds": 3.595555227000091,
+        "evaluation": 0.00764093899999807,
+        "render": 3.428916037000022,
+        "save": 0.13809392200005277,
+        "validation": 0.0621613470000284,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 561,
+        "seconds": 3.2815257849999853,
+        "evaluation": 0.0008541790000435867,
+        "render": 3.1318984150000233,
+        "save": 0.12581335300001228,
+        "validation": 0.07439664499997889,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 562,
+        "seconds": 3.241579168000044,
+        "evaluation": 0.0006397700000206896,
+        "render": 3.0976501869999993,
+        "save": 0.121506601999954,
+        "validation": 0.08314310600007957,
+        "engine": "CYCLES",
+        "samples": 64
+      }
+    ],
+    "mean_seconds": 3.593583587166677,
+    "stage_means": {
+      "evaluation": 0.001998296333340477,
+      "render": 3.434186655166684,
+      "save": 0.13644919183334045,
+      "validation": 0.05733134350000076
+    },
+    "diffs": {
+      "80": {
+        "mae": 0.00011412885214667767,
+        "rmse": 0.000686262093950063,
+        "p99": 0.003921568393707275,
+        "max": 0.03529411554336548
+      },
+      "560": {
+        "mae": 0.00011417083442211151,
+        "rmse": 0.00213998812250793,
+        "p99": 0.003921568393707275,
+        "max": 0.529411792755127
+      }
+    },
+    "telemetry_summary": {
+      "mean_gpu_percent": 21.205128205128204,
+      "peak_gpu_percent": 99.0,
+      "peak_vram_mib": 8738.0,
+      "mean_cpu_percent_all_48_vcpus": 5.479512606453465
+    },
+    "cycles_stages": [
+      {
+        "frame": 80,
+        "scene_sync_seconds": 1.80727,
+        "path_trace_seconds": 0.789356,
+        "denoise_seconds": 0.014566,
+        "bvh_submission_span_seconds": 0.25900000000000034,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 81,
+        "scene_sync_seconds": 1.7254,
+        "path_trace_seconds": 0.786122,
+        "denoise_seconds": 0.005907,
+        "bvh_submission_span_seconds": 0.045999999999999375,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 82,
+        "scene_sync_seconds": 1.71819,
+        "path_trace_seconds": 0.793356,
+        "denoise_seconds": 0.005977,
+        "bvh_submission_span_seconds": 0.030999999999998806,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 560,
+        "scene_sync_seconds": 1.7552,
+        "path_trace_seconds": 0.743079,
+        "denoise_seconds": 0.005959,
+        "bvh_submission_span_seconds": 0.23800000000000132,
+        "bvh_submissions": 259
+      },
+      {
+        "frame": 561,
+        "scene_sync_seconds": 1.71403,
+        "path_trace_seconds": 0.74989,
+        "denoise_seconds": 0.00597,
+        "bvh_submission_span_seconds": 0.03100000000000236,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 562,
+        "scene_sync_seconds": 1.71887,
+        "path_trace_seconds": 0.751244,
+        "denoise_seconds": 0.005971,
+        "bvh_submission_span_seconds": 0.030999999999998806,
+        "bvh_submissions": 2
+      }
+    ],
+    "profiling_note": "Cycles logs provide synchronization/path/denoise durations. BVH submission span is timestamped first-to-last OptiX BVH submission, not an isolated GPU timer; device upload/setup overlaps and is included in total render duration."
+  },
+  "camera_static": {
+    "config": {
+      "compression": 0,
+      "camera_only_blur": true,
+      "reuse_engine": true
+    },
+    "workers": 1,
+    "frames": 6,
+    "wall_seconds": 23.434917564999978,
+    "frames_hour_including_startup": 921.7015566660057,
+    "exit_codes": [
+      0
+    ],
+    "timings": [
+      {
+        "frame": 80,
+        "seconds": 5.245556822000026,
+        "evaluation": 0.001233420000062324,
+        "render": 5.033627322999905,
+        "save": 0.19079313800000364,
+        "validation": 0.03132589200004077,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 81,
+        "seconds": 3.0030238090000694,
+        "evaluation": 0.0006689800000003743,
+        "render": 2.856089001999976,
+        "save": 0.12506536600005802,
+        "validation": 0.04278175199999623,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 82,
+        "seconds": 2.983947348000015,
+        "evaluation": 0.0006286299999374023,
+        "render": 2.839198081000063,
+        "save": 0.1246329360000118,
+        "validation": 0.051069932000018525,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 560,
+        "seconds": 3.293303622999929,
+        "evaluation": 0.008728281000003335,
+        "render": 3.132892414999901,
+        "save": 0.13097770600006697,
+        "validation": 0.062470572999927754,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 561,
+        "seconds": 2.9445765460000075,
+        "evaluation": 0.0007097400000475318,
+        "render": 2.8004626289999806,
+        "save": 0.12179951600001004,
+        "validation": 0.07340370300005361,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 562,
+        "seconds": 2.9427411369999845,
+        "evaluation": 0.000745769999980439,
+        "render": 2.7988908899999387,
+        "save": 0.12153856600002655,
+        "validation": 0.0836475229999678,
+        "engine": "CYCLES",
+        "samples": 64
+      }
+    ],
+    "mean_seconds": 3.402191547500005,
+    "stage_means": {
+      "evaluation": 0.0021191368333385676,
+      "render": 3.2435267233332943,
+      "save": 0.13580120466669618,
+      "validation": 0.05744989583333412
+    },
+    "diffs": {
+      "80": {
+        "mae": 3.557184027158655e-05,
+        "rmse": 0.00037547535612247884,
+        "p99": 0.0,
+        "max": 0.03529411554336548
+      },
+      "560": {
+        "mae": 8.776436879998073e-05,
+        "rmse": 0.0018124504713341594,
+        "p99": 0.003921568393707275,
+        "max": 0.5215686559677124
+      }
+    },
+    "telemetry_summary": {
+      "mean_gpu_percent": 22.266666666666666,
+      "peak_gpu_percent": 99.0,
+      "peak_vram_mib": 8738.0,
+      "mean_cpu_percent_all_48_vcpus": 5.171829913402586
+    },
+    "cycles_stages": [
+      {
+        "frame": 80,
+        "scene_sync_seconds": 1.55272,
+        "path_trace_seconds": 0.78718,
+        "denoise_seconds": 0.014824,
+        "bvh_submission_span_seconds": 0.2610000000000001,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 81,
+        "scene_sync_seconds": 1.49105,
+        "path_trace_seconds": 0.767797,
+        "denoise_seconds": 0.005929,
+        "bvh_submission_span_seconds": 0.036999999999999034,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 82,
+        "scene_sync_seconds": 1.47067,
+        "path_trace_seconds": 0.781073,
+        "denoise_seconds": 0.005901,
+        "bvh_submission_span_seconds": 0.038000000000000256,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 560,
+        "scene_sync_seconds": 1.50506,
+        "path_trace_seconds": 0.721342,
+        "denoise_seconds": 0.005954,
+        "bvh_submission_span_seconds": 0.245000000000001,
+        "bvh_submissions": 259
+      },
+      {
+        "frame": 561,
+        "scene_sync_seconds": 1.46778,
+        "path_trace_seconds": 0.735331,
+        "denoise_seconds": 0.006164,
+        "bvh_submission_span_seconds": 0.038000000000000256,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 562,
+        "scene_sync_seconds": 1.47968,
+        "path_trace_seconds": 0.732145,
+        "denoise_seconds": 0.00615,
+        "bvh_submission_span_seconds": 0.038000000000000256,
+        "bvh_submissions": 2
+      }
+    ],
+    "profiling_note": "Cycles logs provide synchronization/path/denoise durations. BVH submission span is timestamped first-to-last OptiX BVH submission, not an isolated GPU timer; device upload/setup overlaps and is included in total render duration."
+  },
+  "chosen": {
+    "config": {
+      "workers": 3,
+      "threads": 16,
+      "reuse_engine": true,
+      "camera_only_blur": true,
+      "compression": 0,
+      "persistent": true,
+      "denoiser": "OPTIX",
+      "adaptive_threshold": 0.045,
+      "adaptive_min_samples": 8,
+      "max_bounces": 6,
+      "diffuse_bounces": 2,
+      "glossy_bounces": 3,
+      "transmission_bounces": 6,
+      "tile_size": 2048
+    },
+    "workers": 3,
+    "frames": 24,
+    "wall_seconds": 42.244464280999864,
+    "frames_hour_including_startup": 2045.2383873372921,
+    "exit_codes": [
+      0,
+      0,
+      0
+    ],
+    "timings": [
+      {
+        "frame": 81,
+        "seconds": 7.492233070999873,
+        "evaluation": 0.0014126500000202213,
+        "render": 7.266053774999818,
+        "save": 0.19748812600005294,
+        "validation": 0.027278519999981654,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 84,
+        "seconds": 5.022734213999911,
+        "evaluation": 0.0005993299998863222,
+        "render": 4.868796476999933,
+        "save": 0.13452041699997608,
+        "validation": 0.01881799000011597,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 87,
+        "seconds": 4.758142298999928,
+        "evaluation": 0.0005722400001104688,
+        "render": 4.6067875319999985,
+        "save": 0.13447122699994907,
+        "validation": 0.016311299999870243,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 90,
+        "seconds": 4.535601044000032,
+        "evaluation": 0.0006259499998577667,
+        "render": 4.37853235700004,
+        "save": 0.1374471070000709,
+        "validation": 0.018995630000063102,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 561,
+        "seconds": 5.137307309999869,
+        "evaluation": 0.01662014899989117,
+        "render": 4.961093265000045,
+        "save": 0.13936965699986104,
+        "validation": 0.020224239000071975,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 564,
+        "seconds": 4.715126069999997,
+        "evaluation": 0.0005971900000076857,
+        "render": 4.564907413000128,
+        "save": 0.12979658799986282,
+        "validation": 0.019824878999997964,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 567,
+        "seconds": 4.419881505999911,
+        "evaluation": 0.0006937400000879279,
+        "render": 4.2672567089998665,
+        "save": 0.13179123700001583,
+        "validation": 0.0201398199999403,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 570,
+        "seconds": 2.98870703700004,
+        "evaluation": 0.0006316900000911119,
+        "render": 2.8466390700000375,
+        "save": 0.1254911969999739,
+        "validation": 0.01594507999993766,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 80,
+        "seconds": 7.492387920999818,
+        "evaluation": 0.0014756199998373631,
+        "render": 7.258914315000084,
+        "save": 0.2040155560000585,
+        "validation": 0.027982429999838132,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 83,
+        "seconds": 5.0091724240000985,
+        "evaluation": 0.0005658500001572975,
+        "render": 4.858320116999948,
+        "save": 0.1323640069999783,
+        "validation": 0.017922450000014578,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 86,
+        "seconds": 4.758049299000049,
+        "evaluation": 0.0006025300001510914,
+        "render": 4.612696801999846,
+        "save": 0.12793604700004835,
+        "validation": 0.016813920000004146,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 89,
+        "seconds": 4.534129734000089,
+        "evaluation": 0.0006045800000720192,
+        "render": 4.381738896999877,
+        "save": 0.13258905700013202,
+        "validation": 0.019197200000007797,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 560,
+        "seconds": 5.067566781999858,
+        "evaluation": 0.007680369999889081,
+        "render": 4.902235986000051,
+        "save": 0.1365964270000859,
+        "validation": 0.021053998999832402,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 563,
+        "seconds": 4.370842347000007,
+        "evaluation": 0.0006534799999826646,
+        "render": 4.220722410000008,
+        "save": 0.12768667799991817,
+        "validation": 0.021779779000098642,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 566,
+        "seconds": 3.9255330559999493,
+        "evaluation": 0.0006197800000791176,
+        "render": 3.776955249999901,
+        "save": 0.12781936700002916,
+        "validation": 0.020138658999940162,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 569,
+        "seconds": 2.9701872269999967,
+        "evaluation": 0.0006318099999589322,
+        "render": 2.8206191399999625,
+        "save": 0.1285335469999609,
+        "validation": 0.02040273000011439,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 82,
+        "seconds": 7.442020572000047,
+        "evaluation": 0.0011753399999179237,
+        "render": 7.207382757000005,
+        "save": 0.21307034500000555,
+        "validation": 0.020392130000118414,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 85,
+        "seconds": 4.844051916999888,
+        "evaluation": 0.0005787600000530801,
+        "render": 4.696075240000027,
+        "save": 0.12708859700001085,
+        "validation": 0.02030931999979657,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 88,
+        "seconds": 4.583291982999981,
+        "evaluation": 0.0009078399998543318,
+        "render": 4.429690276000201,
+        "save": 0.13112061699985134,
+        "validation": 0.02157325000007404,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 91,
+        "seconds": 3.9592903860000206,
+        "evaluation": 0.0005786599999737518,
+        "render": 3.8106665689999772,
+        "save": 0.12791042700018806,
+        "validation": 0.02013472999988153,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 562,
+        "seconds": 3.66111805200012,
+        "evaluation": 0.007515490000059799,
+        "render": 3.4988630049999756,
+        "save": 0.1328953580000416,
+        "validation": 0.021844199000042863,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 565,
+        "seconds": 3.06625417500004,
+        "evaluation": 0.000635189999911745,
+        "render": 2.923100788000056,
+        "save": 0.12525503699998808,
+        "validation": 0.0172631600000841,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 568,
+        "seconds": 4.159470111000019,
+        "evaluation": 0.0006182889999308827,
+        "render": 4.013268695000079,
+        "save": 0.12624429700008477,
+        "validation": 0.0193388299999242,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 571,
+        "seconds": 4.313258879000159,
+        "evaluation": 0.0006782200000543526,
+        "render": 4.167038172000048,
+        "save": 0.12880619699990348,
+        "validation": 0.01673629000015353,
+        "engine": "CYCLES",
+        "samples": 64
+      }
+    ],
+    "mean_seconds": 4.717764892333321,
+    "stage_means": {
+      "evaluation": 0.0019697811666598377,
+      "render": 4.555764792374997,
+      "save": 0.14001279654166865,
+      "validation": 0.020017522249996016
+    },
+    "diffs": {
+      "80": {
+        "mae": 3.62576829502359e-05,
+        "rmse": 0.0003787530877161771,
+        "p99": 0.0,
+        "max": 0.03529411554336548
+      },
+      "560": {
+        "mae": 9.198931365972385e-05,
+        "rmse": 0.0020842638332396746,
+        "p99": 0.003921568393707275,
+        "max": 0.5215686559677124
+      }
+    },
+    "telemetry_summary": {
+      "mean_gpu_percent": 54.73684210526316,
+      "peak_gpu_percent": 100.0,
+      "peak_vram_mib": 26200.0,
+      "mean_cpu_percent_all_48_vcpus": 9.184616904936545
+    },
+    "cycles_stages": [
+      {
+        "frame": 81,
+        "scene_sync_seconds": 1.62408,
+        "path_trace_seconds": 2.701184,
+        "denoise_seconds": 0.017211,
+        "bvh_submission_span_seconds": 0.6040000000000001,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 84,
+        "scene_sync_seconds": 1.48722,
+        "path_trace_seconds": 2.649075,
+        "denoise_seconds": 0.00795,
+        "bvh_submission_span_seconds": 0.038000000000000256,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 87,
+        "scene_sync_seconds": 1.46571,
+        "path_trace_seconds": 2.439502,
+        "denoise_seconds": 0.006339,
+        "bvh_submission_span_seconds": 0.03900000000000148,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 90,
+        "scene_sync_seconds": 1.46978,
+        "path_trace_seconds": 2.144092,
+        "denoise_seconds": 0.006258,
+        "bvh_submission_span_seconds": 0.0470000000000006,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 561,
+        "scene_sync_seconds": 1.56821,
+        "path_trace_seconds": 1.795036,
+        "denoise_seconds": 0.008186,
+        "bvh_submission_span_seconds": 0.8470000000000013,
+        "bvh_submissions": 259
+      },
+      {
+        "frame": 564,
+        "scene_sync_seconds": 1.53068,
+        "path_trace_seconds": 2.337085,
+        "denoise_seconds": 0.009155,
+        "bvh_submission_span_seconds": 0.036999999999999034,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 567,
+        "scene_sync_seconds": 1.49491,
+        "path_trace_seconds": 2.06613,
+        "denoise_seconds": 0.006851,
+        "bvh_submission_span_seconds": 0.045999999999999375,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 570,
+        "scene_sync_seconds": 1.48401,
+        "path_trace_seconds": 0.734586,
+        "denoise_seconds": 0.005958,
+        "bvh_submission_span_seconds": 0.04200000000000159,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 82,
+        "scene_sync_seconds": 1.58499,
+        "path_trace_seconds": 2.717807,
+        "denoise_seconds": 0.056987,
+        "bvh_submission_span_seconds": 0.5960000000000001,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 85,
+        "scene_sync_seconds": 1.44803,
+        "path_trace_seconds": 2.575714,
+        "denoise_seconds": 0.014565,
+        "bvh_submission_span_seconds": 0.03599999999999959,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 88,
+        "scene_sync_seconds": 1.45839,
+        "path_trace_seconds": 2.290314,
+        "denoise_seconds": 0.009062,
+        "bvh_submission_span_seconds": 0.027000000000001023,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 91,
+        "scene_sync_seconds": 1.46925,
+        "path_trace_seconds": 1.665872,
+        "denoise_seconds": 0.009664,
+        "bvh_submission_span_seconds": 0.0259999999999998,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 562,
+        "scene_sync_seconds": 1.5222,
+        "path_trace_seconds": 1.080378,
+        "denoise_seconds": 0.008002,
+        "bvh_submission_span_seconds": 0.2259999999999991,
+        "bvh_submissions": 259
+      },
+      {
+        "frame": 565,
+        "scene_sync_seconds": 1.46134,
+        "path_trace_seconds": 0.764174,
+        "denoise_seconds": 0.005975,
+        "bvh_submission_span_seconds": 0.038000000000000256,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 568,
+        "scene_sync_seconds": 1.48236,
+        "path_trace_seconds": 1.816337,
+        "denoise_seconds": 0.00606,
+        "bvh_submission_span_seconds": 0.036999999999999034,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 571,
+        "scene_sync_seconds": 1.46121,
+        "path_trace_seconds": 1.98322,
+        "denoise_seconds": 0.006043,
+        "bvh_submission_span_seconds": 0.030999999999998806,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 80,
+        "scene_sync_seconds": 1.60503,
+        "path_trace_seconds": 2.751673,
+        "denoise_seconds": 0.02266,
+        "bvh_submission_span_seconds": 0.6150000000000002,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 83,
+        "scene_sync_seconds": 1.46696,
+        "path_trace_seconds": 2.701796,
+        "denoise_seconds": 0.006259,
+        "bvh_submission_span_seconds": 0.038000000000000256,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 86,
+        "scene_sync_seconds": 1.45813,
+        "path_trace_seconds": 2.465655,
+        "denoise_seconds": 0.00744,
+        "bvh_submission_span_seconds": 0.027999999999998693,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 89,
+        "scene_sync_seconds": 1.4728,
+        "path_trace_seconds": 2.223752,
+        "denoise_seconds": 0.007378,
+        "bvh_submission_span_seconds": 0.03400000000000247,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 560,
+        "scene_sync_seconds": 1.50365,
+        "path_trace_seconds": 1.774964,
+        "denoise_seconds": 0.008327,
+        "bvh_submission_span_seconds": 0.9089999999999989,
+        "bvh_submissions": 259
+      },
+      {
+        "frame": 563,
+        "scene_sync_seconds": 1.48239,
+        "path_trace_seconds": 2.053735,
+        "denoise_seconds": 0.009418,
+        "bvh_submission_span_seconds": 0.027999999999998693,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 566,
+        "scene_sync_seconds": 1.48552,
+        "path_trace_seconds": 1.639123,
+        "denoise_seconds": 0.008673,
+        "bvh_submission_span_seconds": 0.027000000000001023,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 569,
+        "scene_sync_seconds": 1.48376,
+        "path_trace_seconds": 0.732781,
+        "denoise_seconds": 0.006033,
+        "bvh_submission_span_seconds": 0.027000000000001023,
+        "bvh_submissions": 2
+      }
+    ],
+    "profiling_note": "Cycles logs provide synchronization/path/denoise durations. BVH submission span is timestamped first-to-last OptiX BVH submission, not an isolated GPU timer; device upload/setup overlaps and is included in total render duration."
+  },
+  "concurrent1": {
+    "config": {
+      "reuse_engine": true,
+      "compression": 0,
+      "camera_only_blur": true
+    },
+    "workers": 1,
+    "frames": 24,
+    "wall_seconds": 79.15207755699998,
+    "frames_hour_including_startup": 1091.5695793048585,
+    "exit_codes": [
+      0
+    ],
+    "timings": [
+      {
+        "frame": 80,
+        "seconds": 4.534479153999996,
+        "evaluation": 0.0012910100000453895,
+        "render": 4.325534182999945,
+        "save": 0.1871055910000905,
+        "validation": 0.0321292999999514,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 81,
+        "seconds": 3.0323414889999185,
+        "evaluation": 0.000654339999982767,
+        "render": 2.881359657999951,
+        "save": 0.12997022100000777,
+        "validation": 0.04234413999995468,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 82,
+        "seconds": 3.000781489000019,
+        "evaluation": 0.000592989999972815,
+        "render": 2.8560755879999533,
+        "save": 0.12473729100008768,
+        "validation": 0.05083216999992146,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 83,
+        "seconds": 2.978086748999999,
+        "evaluation": 0.0006467000000611733,
+        "render": 2.831842397999935,
+        "save": 0.12396903100000145,
+        "validation": 0.06358554999997068,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 84,
+        "seconds": 2.979356009000071,
+        "evaluation": 0.0006358200000704528,
+        "render": 2.8344386879999774,
+        "save": 0.12412193099999058,
+        "validation": 0.071774180000034,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 85,
+        "seconds": 2.9671369289999348,
+        "evaluation": 0.0006839499999387044,
+        "render": 2.8198956180000323,
+        "save": 0.12476240099999814,
+        "validation": 0.08426463000000695,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 86,
+        "seconds": 2.981505119000076,
+        "evaluation": 0.0006415600000764243,
+        "render": 2.8348925479999707,
+        "save": 0.12482783099994776,
+        "validation": 0.09330689000000802,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 87,
+        "seconds": 2.9829206489999933,
+        "evaluation": 0.0006608399999095127,
+        "render": 2.8366655780000656,
+        "save": 0.12433991099999275,
+        "validation": 0.10405711999999312,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 88,
+        "seconds": 2.983890628999916,
+        "evaluation": 0.0006470299999818963,
+        "render": 2.8369813780000186,
+        "save": 0.12500519099990015,
+        "validation": 0.11369511000009425,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 89,
+        "seconds": 2.9855085290000716,
+        "evaluation": 0.0006393300000127056,
+        "render": 2.8456514279999965,
+        "save": 0.12165259100004278,
+        "validation": 0.11983900999996422,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 90,
+        "seconds": 2.986417868999979,
+        "evaluation": 0.0006533899999112691,
+        "render": 2.845915939000065,
+        "save": 0.12237880999998652,
+        "validation": 0.13016314000003604,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 91,
+        "seconds": 2.985054589000015,
+        "evaluation": 0.0006449999999631473,
+        "render": 2.8411796689999846,
+        "save": 0.12208689999999933,
+        "validation": 0.14332220100004633,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 560,
+        "seconds": 3.3226690189999317,
+        "evaluation": 0.008465290000003733,
+        "render": 3.157467428999894,
+        "save": 0.13590861000000132,
+        "validation": 0.15363921100004063,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 561,
+        "seconds": 3.0142391690000068,
+        "evaluation": 0.0007343600000240258,
+        "render": 2.8697039679999534,
+        "save": 0.12324165100005757,
+        "validation": 0.16363890000002357,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 562,
+        "seconds": 2.957075929000098,
+        "evaluation": 0.0006642800000236093,
+        "render": 2.816863409000007,
+        "save": 0.11827215000005253,
+        "validation": 0.1737999999999147,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 563,
+        "seconds": 2.93830130799995,
+        "evaluation": 0.0006734799999321694,
+        "render": 2.8012780420000354,
+        "save": 0.1178192269999272,
+        "validation": 0.1819397450000224,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 564,
+        "seconds": 2.952923102999989,
+        "evaluation": 0.000711449999926117,
+        "render": 2.812271327000076,
+        "save": 0.11854285599997638,
+        "validation": 0.19374378600002728,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 565,
+        "seconds": 2.9508149230000527,
+        "evaluation": 0.0006512500000326327,
+        "render": 2.8081888970000364,
+        "save": 0.12121510600002239,
+        "validation": 0.20334916499996325,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 566,
+        "seconds": 2.9572174130000803,
+        "evaluation": 0.0006459900000663765,
+        "render": 2.8141958869999826,
+        "save": 0.12105223699995804,
+        "validation": 0.21405711400007021,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 567,
+        "seconds": 2.956451152999989,
+        "evaluation": 0.0006714600000350401,
+        "render": 2.8124930269999595,
+        "save": 0.12161660699996446,
+        "validation": 0.224605084000018,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 568,
+        "seconds": 2.956583992999981,
+        "evaluation": 0.0006914899998946566,
+        "render": 2.8126981370000976,
+        "save": 0.12139673699994091,
+        "validation": 0.23428053400004956,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 569,
+        "seconds": 2.9832600719998936,
+        "evaluation": 0.0006493789999240107,
+        "render": 2.8395591170000216,
+        "save": 0.12168024599998262,
+        "validation": 0.24469710400001077,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 570,
+        "seconds": 2.9564487230001077,
+        "evaluation": 0.0006744300000036674,
+        "render": 2.811877377000087,
+        "save": 0.12160770699995282,
+        "validation": 0.25572494300001836,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 571,
+        "seconds": 2.939879823999945,
+        "evaluation": 0.0006786899999724483,
+        "render": 2.796342647000074,
+        "save": 0.12161847699996997,
+        "validation": 0.2643316329999834,
+        "engine": "CYCLES",
+        "samples": 64
+      }
+    ],
+    "mean_seconds": 3.0534726596666673,
+    "stage_means": {
+      "evaluation": 0.001012646208323531,
+      "render": 2.9059738307083385,
+      "save": 0.1257887212916605,
+      "validation": 0.14821336083333847
+    },
+    "diffs": {
+      "80": {
+        "mae": 3.5361910704523325e-05,
+        "rmse": 0.0003742389380931854,
+        "p99": 0.0,
+        "max": 0.03529411554336548
+      },
+      "560": {
+        "mae": 7.990402809809893e-05,
+        "rmse": 0.0016353522660210729,
+        "p99": 0.003921568393707275,
+        "max": 0.48235297203063965
+      }
+    },
+    "telemetry_summary": {
+      "mean_gpu_percent": 24.713147410358566,
+      "peak_gpu_percent": 100.0,
+      "peak_vram_mib": 8738.0,
+      "mean_cpu_percent_all_48_vcpus": 4.393036536552915
+    },
+    "cycles_stages": [
+      {
+        "frame": 80,
+        "scene_sync_seconds": 1.5749,
+        "path_trace_seconds": 0.78314,
+        "denoise_seconds": 0.014826,
+        "bvh_submission_span_seconds": 0.25399999999999956,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 81,
+        "scene_sync_seconds": 1.47035,
+        "path_trace_seconds": 0.782984,
+        "denoise_seconds": 0.006118,
+        "bvh_submission_span_seconds": 0.03700000000000081,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 82,
+        "scene_sync_seconds": 1.4766,
+        "path_trace_seconds": 0.790413,
+        "denoise_seconds": 0.006104,
+        "bvh_submission_span_seconds": 0.038000000000000256,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 83,
+        "scene_sync_seconds": 1.4609,
+        "path_trace_seconds": 0.783117,
+        "denoise_seconds": 0.006104,
+        "bvh_submission_span_seconds": 0.03700000000000081,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 84,
+        "scene_sync_seconds": 1.47451,
+        "path_trace_seconds": 0.772437,
+        "denoise_seconds": 0.005899,
+        "bvh_submission_span_seconds": 0.036999999999999034,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 85,
+        "scene_sync_seconds": 1.4583,
+        "path_trace_seconds": 0.7744,
+        "denoise_seconds": 0.006092,
+        "bvh_submission_span_seconds": 0.037000000000002586,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 86,
+        "scene_sync_seconds": 1.47091,
+        "path_trace_seconds": 0.773975,
+        "denoise_seconds": 0.005878,
+        "bvh_submission_span_seconds": 0.038000000000000256,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 87,
+        "scene_sync_seconds": 1.47628,
+        "path_trace_seconds": 0.772466,
+        "denoise_seconds": 0.005882,
+        "bvh_submission_span_seconds": 0.037000000000002586,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 88,
+        "scene_sync_seconds": 1.48136,
+        "path_trace_seconds": 0.769037,
+        "denoise_seconds": 0.005949,
+        "bvh_submission_span_seconds": 0.036999999999999034,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 89,
+        "scene_sync_seconds": 1.48296,
+        "path_trace_seconds": 0.773316,
+        "denoise_seconds": 0.005902,
+        "bvh_submission_span_seconds": 0.036999999999999034,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 90,
+        "scene_sync_seconds": 1.48818,
+        "path_trace_seconds": 0.769584,
+        "denoise_seconds": 0.005892,
+        "bvh_submission_span_seconds": 0.036999999999999034,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 91,
+        "scene_sync_seconds": 1.48473,
+        "path_trace_seconds": 0.768384,
+        "denoise_seconds": 0.005966,
+        "bvh_submission_span_seconds": 0.036999999999999034,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 560,
+        "scene_sync_seconds": 1.51816,
+        "path_trace_seconds": 0.723266,
+        "denoise_seconds": 0.006112,
+        "bvh_submission_span_seconds": 0.24600000000000222,
+        "bvh_submissions": 259
+      },
+      {
+        "frame": 561,
+        "scene_sync_seconds": 1.50342,
+        "path_trace_seconds": 0.734742,
+        "denoise_seconds": 0.006173,
+        "bvh_submission_span_seconds": 0.04299999999999926,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 562,
+        "scene_sync_seconds": 1.49229,
+        "path_trace_seconds": 0.731158,
+        "denoise_seconds": 0.006186,
+        "bvh_submission_span_seconds": 0.0379999999999967,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 563,
+        "scene_sync_seconds": 1.48976,
+        "path_trace_seconds": 0.714178,
+        "denoise_seconds": 0.005987,
+        "bvh_submission_span_seconds": 0.036999999999999034,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 564,
+        "scene_sync_seconds": 1.49221,
+        "path_trace_seconds": 0.72956,
+        "denoise_seconds": 0.005965,
+        "bvh_submission_span_seconds": 0.036000000000001364,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 565,
+        "scene_sync_seconds": 1.49618,
+        "path_trace_seconds": 0.723011,
+        "denoise_seconds": 0.005966,
+        "bvh_submission_span_seconds": 0.0379999999999967,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 566,
+        "scene_sync_seconds": 1.49742,
+        "path_trace_seconds": 0.726857,
+        "denoise_seconds": 0.006068,
+        "bvh_submission_span_seconds": 0.036999999999999034,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 567,
+        "scene_sync_seconds": 1.50167,
+        "path_trace_seconds": 0.718674,
+        "denoise_seconds": 0.005958,
+        "bvh_submission_span_seconds": 0.0379999999999967,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 568,
+        "scene_sync_seconds": 1.48942,
+        "path_trace_seconds": 0.729314,
+        "denoise_seconds": 0.005975,
+        "bvh_submission_span_seconds": 0.03700000000000614,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 569,
+        "scene_sync_seconds": 1.51309,
+        "path_trace_seconds": 0.729241,
+        "denoise_seconds": 0.005962,
+        "bvh_submission_span_seconds": 0.0379999999999967,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 570,
+        "scene_sync_seconds": 1.49415,
+        "path_trace_seconds": 0.73025,
+        "denoise_seconds": 0.00607,
+        "bvh_submission_span_seconds": 0.03699999999999193,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 571,
+        "scene_sync_seconds": 1.48462,
+        "path_trace_seconds": 0.720977,
+        "denoise_seconds": 0.005976,
+        "bvh_submission_span_seconds": 0.038000000000010914,
+        "bvh_submissions": 2
+      }
+    ],
+    "profiling_note": "Cycles logs provide synchronization/path/denoise durations. BVH submission span is timestamped first-to-last OptiX BVH submission, not an isolated GPU timer; device upload/setup overlaps and is included in total render duration."
+  },
+  "concurrent2": {
+    "config": {
+      "reuse_engine": true,
+      "compression": 0,
+      "camera_only_blur": true
+    },
+    "workers": 2,
+    "frames": 24,
+    "wall_seconds": 54.42461644800005,
+    "frames_hour_including_startup": 1587.5169296333177,
+    "exit_codes": [
+      0,
+      0
+    ],
+    "timings": [
+      {
+        "frame": 80,
+        "seconds": 5.979775925000013,
+        "evaluation": 0.0011955999999599953,
+        "render": 5.763114080000037,
+        "save": 0.1949741549999544,
+        "validation": 0.032099199000072076,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 82,
+        "seconds": 4.032893914999931,
+        "evaluation": 0.0006291899999268935,
+        "render": 3.8728448200000685,
+        "save": 0.13887503599994488,
+        "validation": 0.04226843900005406,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 84,
+        "seconds": 4.040766855000015,
+        "evaluation": 0.0006471499999634034,
+        "render": 3.8849782990000676,
+        "save": 0.1298727459999327,
+        "validation": 0.05729668900005436,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 86,
+        "seconds": 4.020594814999981,
+        "evaluation": 0.0006439700000555604,
+        "render": 3.862147138999944,
+        "save": 0.13478496699997322,
+        "validation": 0.06511010799999895,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 88,
+        "seconds": 4.04083656499995,
+        "evaluation": 0.0006031499999608059,
+        "render": 3.887845378999941,
+        "save": 0.13235750700005156,
+        "validation": 0.07195811799999774,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 90,
+        "seconds": 4.025595335000048,
+        "evaluation": 0.0006167500000628934,
+        "render": 3.8672879289999855,
+        "save": 0.1367979069999592,
+        "validation": 0.0833249170000272,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 560,
+        "seconds": 4.550665252000044,
+        "evaluation": 0.00820218000001205,
+        "render": 4.376576785999987,
+        "save": 0.1441610069999797,
+        "validation": 0.09450447700010045,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 562,
+        "seconds": 4.013222405000079,
+        "evaluation": 0.0006368800000018382,
+        "render": 3.866054869000095,
+        "save": 0.12454637700000148,
+        "validation": 0.10519690699993589,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 564,
+        "seconds": 3.998342105000006,
+        "evaluation": 0.0006509300000061558,
+        "render": 3.8491119679999883,
+        "save": 0.12749231700001928,
+        "validation": 0.11444011699995826,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 566,
+        "seconds": 3.9818102950000593,
+        "evaluation": 0.0006410000000869331,
+        "render": 3.8273068389999025,
+        "save": 0.13148151699999744,
+        "validation": 0.12456717700001718,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 568,
+        "seconds": 4.030938814000024,
+        "evaluation": 0.0006446400000186259,
+        "render": 3.8711219079999637,
+        "save": 0.13104874600003313,
+        "validation": 0.14054137699997682,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 570,
+        "seconds": 4.014660933999949,
+        "evaluation": 0.0008433499999682681,
+        "render": 3.8619146679999403,
+        "save": 0.13140010699999038,
+        "validation": 0.14307521600005657,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 81,
+        "seconds": 5.998220174000039,
+        "evaluation": 0.0012281500000881351,
+        "render": 5.785670859999982,
+        "save": 0.19166993499993623,
+        "validation": 0.03120675900004244,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 83,
+        "seconds": 4.038859164999963,
+        "evaluation": 0.0006046199999900637,
+        "render": 3.8871119279999675,
+        "save": 0.13130589700006112,
+        "validation": 0.041848518999927364,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 85,
+        "seconds": 4.011535265999896,
+        "evaluation": 0.0006742299999586976,
+        "render": 3.858768120000036,
+        "save": 0.13139696600001116,
+        "validation": 0.05269537899994248,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 87,
+        "seconds": 4.029680325000072,
+        "evaluation": 0.0010110800000120435,
+        "render": 3.8772007989999793,
+        "save": 0.13135533600006966,
+        "validation": 0.06259616900001674,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 89,
+        "seconds": 4.03990744500004,
+        "evaluation": 0.000746970000022884,
+        "render": 3.886671428999989,
+        "save": 0.13269353600003342,
+        "validation": 0.07317280799998116,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 91,
+        "seconds": 4.0238181060000215,
+        "evaluation": 0.0006375300000627249,
+        "render": 3.875485260000005,
+        "save": 0.12780623599996943,
+        "validation": 0.08318463800003428,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 561,
+        "seconds": 4.545859631999974,
+        "evaluation": 0.020285598999976173,
+        "render": 4.370041646999994,
+        "save": 0.13340359599999374,
+        "validation": 0.09535535800000616,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 563,
+        "seconds": 3.9854956850000463,
+        "evaluation": 0.0006623100000524573,
+        "render": 3.8332321990000082,
+        "save": 0.12968857699991077,
+        "validation": 0.10419134699998267,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 565,
+        "seconds": 4.004287485000077,
+        "evaluation": 0.0005905799999936789,
+        "render": 3.8559298690000787,
+        "save": 0.12672606699993594,
+        "validation": 0.11369157700005417,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 567,
+        "seconds": 4.001570354000023,
+        "evaluation": 0.0006575500000280954,
+        "render": 3.8570539679999456,
+        "save": 0.12330926700008149,
+        "validation": 0.12416418699990572,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 569,
+        "seconds": 4.0222338139999465,
+        "evaluation": 0.0006186099999467842,
+        "render": 3.8733244280000463,
+        "save": 0.12153842599991549,
+        "validation": 0.13962994700000309,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 571,
+        "seconds": 3.9948763750001035,
+        "evaluation": 0.0006081100000301376,
+        "render": 3.842408708999983,
+        "save": 0.1304082860000335,
+        "validation": 0.1447460059999912,
+        "engine": "CYCLES",
+        "samples": 64
+      }
+    ],
+    "mean_seconds": 4.226101960041679,
+    "stage_means": {
+      "evaluation": 0.0018450053750077207,
+      "render": 4.066383495833331,
+      "save": 0.1362122714166579,
+      "validation": 0.08920272645833904
+    },
+    "diffs": {
+      "80": {
+        "mae": 3.636421388364397e-05,
+        "rmse": 0.0003793368232436478,
+        "p99": 0.0,
+        "max": 0.03529411554336548
+      },
+      "560": {
+        "mae": 9.883477468974888e-05,
+        "rmse": 0.00226950622163713,
+        "p99": 0.003921568393707275,
+        "max": 0.458823561668396
+      }
+    },
+    "telemetry_summary": {
+      "mean_gpu_percent": 41.51744186046512,
+      "peak_gpu_percent": 100.0,
+      "peak_vram_mib": 17516.0,
+      "mean_cpu_percent_all_48_vcpus": 6.763140302013079
+    },
+    "cycles_stages": [
+      {
+        "frame": 80,
+        "scene_sync_seconds": 1.56166,
+        "path_trace_seconds": 1.789693,
+        "denoise_seconds": 0.018842,
+        "bvh_submission_span_seconds": 0.44700000000000006,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 82,
+        "scene_sync_seconds": 1.46041,
+        "path_trace_seconds": 1.77648,
+        "denoise_seconds": 0.00854,
+        "bvh_submission_span_seconds": 0.03799999999999848,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 84,
+        "scene_sync_seconds": 1.46038,
+        "path_trace_seconds": 1.799471,
+        "denoise_seconds": 0.007301,
+        "bvh_submission_span_seconds": 0.038000000000000256,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 86,
+        "scene_sync_seconds": 1.44831,
+        "path_trace_seconds": 1.797828,
+        "denoise_seconds": 0.008279,
+        "bvh_submission_span_seconds": 0.036999999999999034,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 88,
+        "scene_sync_seconds": 1.4611,
+        "path_trace_seconds": 1.809778,
+        "denoise_seconds": 0.00718,
+        "bvh_submission_span_seconds": 0.036999999999999034,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 90,
+        "scene_sync_seconds": 1.45535,
+        "path_trace_seconds": 1.790023,
+        "denoise_seconds": 0.008779,
+        "bvh_submission_span_seconds": 0.038999999999997925,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 560,
+        "scene_sync_seconds": 1.50944,
+        "path_trace_seconds": 1.748772,
+        "denoise_seconds": 0.007709,
+        "bvh_submission_span_seconds": 0.4239999999999995,
+        "bvh_submissions": 259
+      },
+      {
+        "frame": 562,
+        "scene_sync_seconds": 1.4778,
+        "path_trace_seconds": 1.7155,
+        "denoise_seconds": 0.006339,
+        "bvh_submission_span_seconds": 0.03899999999999437,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 564,
+        "scene_sync_seconds": 1.46119,
+        "path_trace_seconds": 1.732291,
+        "denoise_seconds": 0.006095,
+        "bvh_submission_span_seconds": 0.03800000000000381,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 566,
+        "scene_sync_seconds": 1.46402,
+        "path_trace_seconds": 1.696583,
+        "denoise_seconds": 0.007641,
+        "bvh_submission_span_seconds": 0.0379999999999967,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 568,
+        "scene_sync_seconds": 1.47382,
+        "path_trace_seconds": 1.762746,
+        "denoise_seconds": 0.007221,
+        "bvh_submission_span_seconds": 0.036999999999999034,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 570,
+        "scene_sync_seconds": 1.48305,
+        "path_trace_seconds": 1.729092,
+        "denoise_seconds": 0.006181,
+        "bvh_submission_span_seconds": 0.03900000000000148,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 81,
+        "scene_sync_seconds": 1.57788,
+        "path_trace_seconds": 1.708068,
+        "denoise_seconds": 0.023675,
+        "bvh_submission_span_seconds": 0.43900000000000006,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 83,
+        "scene_sync_seconds": 1.47173,
+        "path_trace_seconds": 1.761615,
+        "denoise_seconds": 0.00604,
+        "bvh_submission_span_seconds": 0.036999999999999034,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 85,
+        "scene_sync_seconds": 1.44656,
+        "path_trace_seconds": 1.764464,
+        "denoise_seconds": 0.006042,
+        "bvh_submission_span_seconds": 0.03700000000000081,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 87,
+        "scene_sync_seconds": 1.47863,
+        "path_trace_seconds": 1.7627,
+        "denoise_seconds": 0.006078,
+        "bvh_submission_span_seconds": 0.037000000000002586,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 89,
+        "scene_sync_seconds": 1.46793,
+        "path_trace_seconds": 1.769945,
+        "denoise_seconds": 0.006013,
+        "bvh_submission_span_seconds": 0.038000000000000256,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 91,
+        "scene_sync_seconds": 1.47089,
+        "path_trace_seconds": 1.74435,
+        "denoise_seconds": 0.008054,
+        "bvh_submission_span_seconds": 0.036999999999999034,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 561,
+        "scene_sync_seconds": 1.49864,
+        "path_trace_seconds": 1.721872,
+        "denoise_seconds": 0.005976,
+        "bvh_submission_span_seconds": 0.41699999999999804,
+        "bvh_submissions": 259
+      },
+      {
+        "frame": 563,
+        "scene_sync_seconds": 1.45892,
+        "path_trace_seconds": 1.741281,
+        "denoise_seconds": 0.007787,
+        "bvh_submission_span_seconds": 0.036999999999999034,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 565,
+        "scene_sync_seconds": 1.4766,
+        "path_trace_seconds": 1.754909,
+        "denoise_seconds": 0.007192,
+        "bvh_submission_span_seconds": 0.036999999999999034,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 567,
+        "scene_sync_seconds": 1.47021,
+        "path_trace_seconds": 1.74735,
+        "denoise_seconds": 0.00607,
+        "bvh_submission_span_seconds": 0.03900000000000148,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 569,
+        "scene_sync_seconds": 1.47104,
+        "path_trace_seconds": 1.730316,
+        "denoise_seconds": 0.006094,
+        "bvh_submission_span_seconds": 0.036999999999999034,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 571,
+        "scene_sync_seconds": 1.46172,
+        "path_trace_seconds": 1.758999,
+        "denoise_seconds": 0.008089,
+        "bvh_submission_span_seconds": 0.0379999999999967,
+        "bvh_submissions": 2
+      }
+    ],
+    "profiling_note": "Cycles logs provide synchronization/path/denoise durations. BVH submission span is timestamped first-to-last OptiX BVH submission, not an isolated GPU timer; device upload/setup overlaps and is included in total render duration."
+  },
+  "concurrent3": {
+    "config": {
+      "reuse_engine": true,
+      "compression": 0,
+      "camera_only_blur": true
+    },
+    "workers": 3,
+    "frames": 24,
+    "wall_seconds": 44.198877787000015,
+    "frames_hour_including_startup": 1954.8007625074224,
+    "exit_codes": [
+      0,
+      0,
+      0
+    ],
+    "timings": [
+      {
+        "frame": 81,
+        "seconds": 7.298518328,
+        "evaluation": 0.0018880000000081054,
+        "render": 7.081159054000068,
+        "save": 0.19955251499993665,
+        "validation": 0.02752740900007211,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 84,
+        "seconds": 4.952253639999981,
+        "evaluation": 0.0006666100000529696,
+        "render": 4.7961883039999975,
+        "save": 0.13754751599992687,
+        "validation": 0.04001581900001838,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 87,
+        "seconds": 4.890151310999954,
+        "evaluation": 0.000648699999942437,
+        "render": 4.736539425000046,
+        "save": 0.135285946999943,
+        "validation": 0.04886158900001192,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 90,
+        "seconds": 4.841267521999953,
+        "evaluation": 0.0005813000000216562,
+        "render": 4.687617705999969,
+        "save": 0.13600564700004725,
+        "validation": 0.0585160979999273,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 561,
+        "seconds": 5.132826174999991,
+        "evaluation": 0.00822369999991679,
+        "render": 4.972662808999985,
+        "save": 0.13359416700006932,
+        "validation": 0.0700347879999299,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 564,
+        "seconds": 4.615342127999952,
+        "evaluation": 0.0007263999999622683,
+        "render": 4.469980372000009,
+        "save": 0.1267672170000651,
+        "validation": 0.07924255799991897,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 567,
+        "seconds": 4.616400397999996,
+        "evaluation": 0.000691960000040126,
+        "render": 4.471903072000032,
+        "save": 0.12638686699995105,
+        "validation": 0.09007571699999062,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 570,
+        "seconds": 4.583748539999988,
+        "evaluation": 0.0006922999999687818,
+        "render": 4.437019584000041,
+        "save": 0.12817130599989923,
+        "validation": 0.1000778080000373,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 80,
+        "seconds": 7.337534226999992,
+        "evaluation": 0.0016745599999694605,
+        "render": 7.123825613000008,
+        "save": 0.19548612500000218,
+        "validation": 0.02798572899996543,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 83,
+        "seconds": 4.941869730000008,
+        "evaluation": 0.0006203799999866533,
+        "render": 4.79074514399997,
+        "save": 0.1341414360000499,
+        "validation": 0.038099788999943485,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 86,
+        "seconds": 4.881702042000029,
+        "evaluation": 0.0006473299999925075,
+        "render": 4.726811006000048,
+        "save": 0.13681884599998284,
+        "validation": 0.04934060899995529,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 89,
+        "seconds": 4.84376905299996,
+        "evaluation": 0.0006842500000630025,
+        "render": 4.690746106999995,
+        "save": 0.13525056599996788,
+        "validation": 0.05921904900003483,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 560,
+        "seconds": 5.125622355000019,
+        "evaluation": 0.015416079000033278,
+        "render": 4.953775070000006,
+        "save": 0.13855116599995654,
+        "validation": 0.06969046799997614,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 563,
+        "seconds": 4.610498678999988,
+        "evaluation": 0.0006547699999828183,
+        "render": 4.466084543000079,
+        "save": 0.12583141699997213,
+        "validation": 0.07963480800003708,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 566,
+        "seconds": 4.597091019000004,
+        "evaluation": 0.0006606890000284693,
+        "render": 4.449188332999938,
+        "save": 0.1294188670000267,
+        "validation": 0.08922356799996578,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 569,
+        "seconds": 4.58717116899993,
+        "evaluation": 0.0006851800000049479,
+        "render": 4.439308462999975,
+        "save": 0.1298614859999816,
+        "validation": 0.09888477799995599,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 82,
+        "seconds": 7.272541638999996,
+        "evaluation": 0.0011216799999829163,
+        "render": 7.029696905999913,
+        "save": 0.2230073740000762,
+        "validation": 0.030004268999960004,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 85,
+        "seconds": 4.886173051000014,
+        "evaluation": 0.0005847300000141331,
+        "render": 4.712800156000071,
+        "save": 0.1518856960000221,
+        "validation": 0.04226606899999297,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 88,
+        "seconds": 4.857463112000005,
+        "evaluation": 0.0006754300000011426,
+        "render": 4.682954797000093,
+        "save": 0.1506326960000024,
+        "validation": 0.05651065799997923,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 91,
+        "seconds": 4.741671686000018,
+        "evaluation": 0.0007247600000255261,
+        "render": 4.585056489999943,
+        "save": 0.1342440959999749,
+        "validation": 0.07629956800008131,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 562,
+        "seconds": 5.001569128000028,
+        "evaluation": 0.01681223000002774,
+        "render": 4.831612361999987,
+        "save": 0.13238648700007616,
+        "validation": 0.07210721799992825,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 565,
+        "seconds": 4.626105017999976,
+        "evaluation": 0.0006561000000147033,
+        "render": 4.481339921999961,
+        "save": 0.12427679699999317,
+        "validation": 0.0812918480000917,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 568,
+        "seconds": 4.623035808000054,
+        "evaluation": 0.0006024900000056732,
+        "render": 4.473424971999975,
+        "save": 0.12757595700009006,
+        "validation": 0.09309079699994527,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 571,
+        "seconds": 4.516416321000065,
+        "evaluation": 0.0005931200000759418,
+        "render": 4.367433174999974,
+        "save": 0.12739377699995202,
+        "validation": 0.10314895700003035,
+        "engine": "CYCLES",
+        "samples": 64
+      }
+    ],
+    "mean_seconds": 5.099197586624996,
+    "stage_means": {
+      "evaluation": 0.0023721978333384186,
+      "render": 4.935744724375003,
+      "save": 0.14250308212499854,
+      "validation": 0.06588124866665623
+    },
+    "diffs": {
+      "80": {
+        "mae": 3.608433689805679e-05,
+        "rmse": 0.00037795910611748695,
+        "p99": 0.0,
+        "max": 0.03529411554336548
+      },
+      "560": {
+        "mae": 9.539594611851498e-05,
+        "rmse": 0.002093137940391898,
+        "p99": 0.003921568393707275,
+        "max": 0.529411792755127
+      }
+    },
+    "telemetry_summary": {
+      "mean_gpu_percent": 52.388489208633096,
+      "peak_gpu_percent": 100.0,
+      "peak_vram_mib": 26248.0,
+      "mean_cpu_percent_all_48_vcpus": 9.295492033598736
+    },
+    "cycles_stages": [
+      {
+        "frame": 81,
+        "scene_sync_seconds": 1.58213,
+        "path_trace_seconds": 2.609065,
+        "denoise_seconds": 0.019447,
+        "bvh_submission_span_seconds": 0.5860000000000003,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 84,
+        "scene_sync_seconds": 1.46166,
+        "path_trace_seconds": 2.627811,
+        "denoise_seconds": 0.007938,
+        "bvh_submission_span_seconds": 0.03999999999999915,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 87,
+        "scene_sync_seconds": 1.45388,
+        "path_trace_seconds": 2.619193,
+        "denoise_seconds": 0.007247,
+        "bvh_submission_span_seconds": 0.02800000000000047,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 90,
+        "scene_sync_seconds": 1.46012,
+        "path_trace_seconds": 2.554488,
+        "denoise_seconds": 0.007405,
+        "bvh_submission_span_seconds": 0.027000000000001023,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 561,
+        "scene_sync_seconds": 1.51168,
+        "path_trace_seconds": 2.285217,
+        "denoise_seconds": 0.007295,
+        "bvh_submission_span_seconds": 0.4280000000000008,
+        "bvh_submissions": 259
+      },
+      {
+        "frame": 564,
+        "scene_sync_seconds": 1.44717,
+        "path_trace_seconds": 2.294428,
+        "denoise_seconds": 0.007089,
+        "bvh_submission_span_seconds": 0.04200000000000159,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 567,
+        "scene_sync_seconds": 1.45669,
+        "path_trace_seconds": 2.346556,
+        "denoise_seconds": 0.006107,
+        "bvh_submission_span_seconds": 0.030999999999998806,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 570,
+        "scene_sync_seconds": 1.50199,
+        "path_trace_seconds": 2.243938,
+        "denoise_seconds": 0.006094,
+        "bvh_submission_span_seconds": 0.03300000000000125,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 82,
+        "scene_sync_seconds": 1.59692,
+        "path_trace_seconds": 2.611754,
+        "denoise_seconds": 0.058631,
+        "bvh_submission_span_seconds": 0.5569999999999995,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 85,
+        "scene_sync_seconds": 1.45465,
+        "path_trace_seconds": 2.583052,
+        "denoise_seconds": 0.008339,
+        "bvh_submission_span_seconds": 0.04099999999999859,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 88,
+        "scene_sync_seconds": 1.4736,
+        "path_trace_seconds": 2.538037,
+        "denoise_seconds": 0.01067,
+        "bvh_submission_span_seconds": 0.027999999999998693,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 91,
+        "scene_sync_seconds": 1.45893,
+        "path_trace_seconds": 2.452714,
+        "denoise_seconds": 0.012152,
+        "bvh_submission_span_seconds": 0.027999999999998693,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 562,
+        "scene_sync_seconds": 1.54596,
+        "path_trace_seconds": 2.291195,
+        "denoise_seconds": 0.009001,
+        "bvh_submission_span_seconds": 0.29100000000000037,
+        "bvh_submissions": 259
+      },
+      {
+        "frame": 565,
+        "scene_sync_seconds": 1.52702,
+        "path_trace_seconds": 2.273058,
+        "denoise_seconds": 0.011217,
+        "bvh_submission_span_seconds": 0.027999999999998693,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 568,
+        "scene_sync_seconds": 1.53067,
+        "path_trace_seconds": 2.299525,
+        "denoise_seconds": 0.008226,
+        "bvh_submission_span_seconds": 0.027000000000001023,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 571,
+        "scene_sync_seconds": 1.48361,
+        "path_trace_seconds": 2.219822,
+        "denoise_seconds": 0.016622,
+        "bvh_submission_span_seconds": 0.028000000000005798,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 80,
+        "scene_sync_seconds": 1.60796,
+        "path_trace_seconds": 2.648808,
+        "denoise_seconds": 0.024396,
+        "bvh_submission_span_seconds": 0.5790000000000006,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 83,
+        "scene_sync_seconds": 1.49414,
+        "path_trace_seconds": 2.58248,
+        "denoise_seconds": 0.006082,
+        "bvh_submission_span_seconds": 0.038000000000000256,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 86,
+        "scene_sync_seconds": 1.48514,
+        "path_trace_seconds": 2.529198,
+        "denoise_seconds": 0.006085,
+        "bvh_submission_span_seconds": 0.02800000000000047,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 89,
+        "scene_sync_seconds": 1.48114,
+        "path_trace_seconds": 2.484761,
+        "denoise_seconds": 0.006049,
+        "bvh_submission_span_seconds": 0.027999999999998693,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 560,
+        "scene_sync_seconds": 1.51717,
+        "path_trace_seconds": 2.251439,
+        "denoise_seconds": 0.006003,
+        "bvh_submission_span_seconds": 0.40400000000000347,
+        "bvh_submissions": 259
+      },
+      {
+        "frame": 563,
+        "scene_sync_seconds": 1.52244,
+        "path_trace_seconds": 2.212777,
+        "denoise_seconds": 0.006041,
+        "bvh_submission_span_seconds": 0.028999999999999915,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 566,
+        "scene_sync_seconds": 1.51195,
+        "path_trace_seconds": 2.213769,
+        "denoise_seconds": 0.007224,
+        "bvh_submission_span_seconds": 0.026999999999993918,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 569,
+        "scene_sync_seconds": 1.4802,
+        "path_trace_seconds": 2.278322,
+        "denoise_seconds": 0.007241,
+        "bvh_submission_span_seconds": 0.027000000000001023,
+        "bvh_submissions": 2
+      }
+    ],
+    "profiling_note": "Cycles logs provide synchronization/path/denoise durations. BVH submission span is timestamped first-to-last OptiX BVH submission, not an isolated GPU timer; device upload/setup overlaps and is included in total render duration."
+  },
+  "gpu_compositor": {
+    "config": {
+      "compression": 0,
+      "compositor_device": "GPU",
+      "reuse_engine": true
+    },
+    "workers": 1,
+    "frames": 6,
+    "wall_seconds": 24.582673808000095,
+    "frames_hour_including_startup": 878.6676408231303,
+    "exit_codes": [
+      0
+    ],
+    "timings": [
+      {
+        "frame": 80,
+        "seconds": 4.800208650000059,
+        "evaluation": 0.0013440799999671071,
+        "render": 4.589949362000084,
+        "save": 0.1891511649999984,
+        "validation": 0.03153798400001051,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 81,
+        "seconds": 3.326455485999986,
+        "evaluation": 0.0007237400000121852,
+        "render": 3.176589097000033,
+        "save": 0.1289259969998966,
+        "validation": 0.04209233500000664,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 82,
+        "seconds": 3.3117329789999985,
+        "evaluation": 0.0006649000000606975,
+        "render": 3.163446553999961,
+        "save": 0.12460180599998694,
+        "validation": 0.05480212800000572,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 560,
+        "seconds": 3.596167817000037,
+        "evaluation": 0.0075126990000171645,
+        "render": 3.433455503999994,
+        "save": 0.13475168499996926,
+        "validation": 0.062160838000068,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 561,
+        "seconds": 3.3036156480000045,
+        "evaluation": 0.0006730000000061409,
+        "render": 3.1601864430000433,
+        "save": 0.12260950600000342,
+        "validation": 0.0721236870000439,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 562,
+        "seconds": 3.232140600999969,
+        "evaluation": 0.0006623900000022331,
+        "render": 3.0903693760000124,
+        "save": 0.11805084599996007,
+        "validation": 0.08532386700005645,
+        "engine": "CYCLES",
+        "samples": 64
+      }
+    ],
+    "mean_seconds": 3.5950535301666755,
+    "stage_means": {
+      "evaluation": 0.0019301348333442547,
+      "render": 3.4356660560000214,
+      "save": 0.13634850083330244,
+      "validation": 0.05800680650003187
+    },
+    "diffs": {
+      "80": {
+        "mae": 3.562037454685196e-05,
+        "rmse": 0.00037583403172902763,
+        "p99": 0.0,
+        "max": 0.03529411554336548
+      },
+      "560": {
+        "mae": 9.677839989308268e-05,
+        "rmse": 0.00225436850450933,
+        "p99": 0.003921568393707275,
+        "max": 0.529411792755127
+      }
+    },
+    "telemetry_summary": {
+      "mean_gpu_percent": 19.012820512820515,
+      "peak_gpu_percent": 99.0,
+      "peak_vram_mib": 8736.0,
+      "mean_cpu_percent_all_48_vcpus": 5.502605093944479
+    },
+    "cycles_stages": [
+      {
+        "frame": 80,
+        "scene_sync_seconds": 1.78398,
+        "path_trace_seconds": 0.790968,
+        "denoise_seconds": 0.016241,
+        "bvh_submission_span_seconds": 0.26199999999999957,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 81,
+        "scene_sync_seconds": 1.71487,
+        "path_trace_seconds": 0.779882,
+        "denoise_seconds": 0.005973,
+        "bvh_submission_span_seconds": 0.04600000000000115,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 82,
+        "scene_sync_seconds": 1.73312,
+        "path_trace_seconds": 0.793371,
+        "denoise_seconds": 0.005943,
+        "bvh_submission_span_seconds": 0.04100000000000037,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 560,
+        "scene_sync_seconds": 1.75645,
+        "path_trace_seconds": 0.741234,
+        "denoise_seconds": 0.005985,
+        "bvh_submission_span_seconds": 0.24399999999999977,
+        "bvh_submissions": 259
+      },
+      {
+        "frame": 561,
+        "scene_sync_seconds": 1.72818,
+        "path_trace_seconds": 0.756242,
+        "denoise_seconds": 0.005986,
+        "bvh_submission_span_seconds": 0.0470000000000006,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 562,
+        "scene_sync_seconds": 1.70537,
+        "path_trace_seconds": 0.748306,
+        "denoise_seconds": 0.005984,
+        "bvh_submission_span_seconds": 0.04299999999999926,
+        "bvh_submissions": 2
+      }
+    ],
+    "profiling_note": "Cycles logs provide synchronization/path/denoise durations. BVH submission span is timestamped first-to-last OptiX BVH submission, not an isolated GPU timer; device upload/setup overlaps and is included in total render duration."
+  },
+  "hybrid": {
+    "config": {
+      "compression": 0,
+      "hybrid": true,
+      "reuse_engine": true
+    },
+    "workers": 1,
+    "frames": 6,
+    "wall_seconds": 30.416294351000033,
+    "frames_hour_including_startup": 710.1456788502519,
+    "exit_codes": [
+      0
+    ],
+    "timings": [
+      {
+        "frame": 80,
+        "seconds": 5.814920646000019,
+        "evaluation": 0.0012108800000305564,
+        "render": 5.606424114999982,
+        "save": 0.18771274200003063,
+        "validation": 0.031023538999988887,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 81,
+        "seconds": 4.173166929999979,
+        "evaluation": 0.0006730189999188951,
+        "render": 4.031158366999989,
+        "save": 0.12202606500000002,
+        "validation": 0.04101391800008969,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 82,
+        "seconds": 4.027702629999908,
+        "evaluation": 0.0006573699999989913,
+        "render": 3.8845460589999448,
+        "save": 0.12113876299997628,
+        "validation": 0.052929436999988866,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 560,
+        "seconds": 5.256894227999965,
+        "evaluation": 0.008420619000048646,
+        "render": 5.0975999479999246,
+        "save": 0.13096172200005185,
+        "validation": 0.061875686999997015,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 561,
+        "seconds": 4.436515736999922,
+        "evaluation": 0.0006573199999593271,
+        "render": 4.291403216000049,
+        "save": 0.12150185199993757,
+        "validation": 0.07432112599997254,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 562,
+        "seconds": 3.664138032999972,
+        "evaluation": 0.0006369899999754125,
+        "render": 3.524302630999955,
+        "save": 0.12146170300002268,
+        "validation": 0.07922963500004698,
+        "engine": "CYCLES",
+        "samples": 64
+      }
+    ],
+    "mean_seconds": 4.5622230339999605,
+    "stage_means": {
+      "evaluation": 0.0020426996666553046,
+      "render": 4.405905722666641,
+      "save": 0.1341338078333365,
+      "validation": 0.05673222366668066
+    },
+    "diffs": {
+      "80": {
+        "mae": 0.0005718161119148135,
+        "rmse": 0.0018220480997115374,
+        "p99": 0.00784313678741455,
+        "max": 0.10196080803871155
+      },
+      "560": {
+        "mae": 0.0019604736007750034,
+        "rmse": 0.015924274921417236,
+        "p99": 0.04313725233078003,
+        "max": 0.6549019813537598
+      }
+    },
+    "telemetry_summary": {
+      "mean_gpu_percent": 17.166666666666668,
+      "peak_gpu_percent": 99.0,
+      "peak_vram_mib": 8960.0,
+      "mean_cpu_percent_all_48_vcpus": 27.18072809370528
+    },
+    "cycles_stages": [
+      {
+        "frame": 80,
+        "scene_sync_seconds": 1.75812,
+        "path_trace_seconds": 1.247559,
+        "denoise_seconds": 0.076836,
+        "bvh_submission_span_seconds": 0.26900000000000013,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 81,
+        "scene_sync_seconds": 1.71263,
+        "path_trace_seconds": 0.811856,
+        "denoise_seconds": 0.029289,
+        "bvh_submission_span_seconds": 0.04100000000000037,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 82,
+        "scene_sync_seconds": 1.68407,
+        "path_trace_seconds": 0.835132,
+        "denoise_seconds": 0.030819,
+        "bvh_submission_span_seconds": 0.04100000000000037,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 560,
+        "scene_sync_seconds": 1.73002,
+        "path_trace_seconds": 1.423902,
+        "denoise_seconds": 0.031028,
+        "bvh_submission_span_seconds": 0.25200000000000244,
+        "bvh_submissions": 259
+      },
+      {
+        "frame": 561,
+        "scene_sync_seconds": 1.68493,
+        "path_trace_seconds": 0.916065,
+        "denoise_seconds": 0.031275,
+        "bvh_submission_span_seconds": 0.03999999999999915,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 562,
+        "scene_sync_seconds": 1.70819,
+        "path_trace_seconds": 0.824962,
+        "denoise_seconds": 0.031193,
+        "bvh_submission_span_seconds": 0.04100000000000037,
+        "bvh_submissions": 2
+      }
+    ],
+    "profiling_note": "Cycles logs provide synchronization/path/denoise durations. BVH submission span is timestamped first-to-last OptiX BVH submission, not an isolated GPU timer; device upload/setup overlaps and is included in total render duration."
+  },
+  "oidn": {
+    "config": {
+      "compression": 0,
+      "denoiser": "OPENIMAGEDENOISE",
+      "reuse_engine": true
+    },
+    "workers": 1,
+    "frames": 6,
+    "wall_seconds": 24.512724153999898,
+    "frames_hour_including_startup": 881.1750119774179,
+    "exit_codes": [
+      0
+    ],
+    "timings": [
+      {
+        "frame": 80,
+        "seconds": 4.875291485000048,
+        "evaluation": 0.001259060000052159,
+        "render": 4.6685695959999975,
+        "save": 0.18499901799998497,
+        "validation": 0.031665001999954256,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 81,
+        "seconds": 3.2991645030000427,
+        "evaluation": 0.0007117100000186838,
+        "render": 3.1588688859999365,
+        "save": 0.11759856600008334,
+        "validation": 0.04326883099997758,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 82,
+        "seconds": 3.2685426720000805,
+        "evaluation": 0.0008168300000761519,
+        "render": 3.129127325000013,
+        "save": 0.11781663599992953,
+        "validation": 0.052136082000060924,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 560,
+        "seconds": 3.586724505999996,
+        "evaluation": 0.008249270999954206,
+        "render": 3.4285485880000124,
+        "save": 0.12948987599997963,
+        "validation": 0.061658003000047756,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 561,
+        "seconds": 3.2563338009999825,
+        "evaluation": 0.0007519900000261259,
+        "render": 3.115491383999938,
+        "save": 0.11763346600002933,
+        "validation": 0.07407110300005115,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 562,
+        "seconds": 3.2329617199999348,
+        "evaluation": 0.0007482699999172837,
+        "render": 3.093365143000028,
+        "save": 0.11782324600005722,
+        "validation": 0.08272554299992407,
+        "engine": "CYCLES",
+        "samples": 64
+      }
+    ],
+    "mean_seconds": 3.586503114500014,
+    "stage_means": {
+      "evaluation": 0.0020895218333407684,
+      "render": 3.4323284869999875,
+      "save": 0.13089346800001067,
+      "validation": 0.05758742733333596
+    },
+    "diffs": {
+      "80": {
+        "mae": 0.00558988144621253,
+        "rmse": 0.00822138600051403,
+        "p99": 0.027450978755950928,
+        "max": 0.22352942824363708
+      },
+      "560": {
+        "mae": 0.008159796707332134,
+        "rmse": 0.013867110945284367,
+        "p99": 0.05098038911819458,
+        "max": 0.4941176772117615
+      }
+    },
+    "telemetry_summary": {
+      "mean_gpu_percent": 19.935897435897434,
+      "peak_gpu_percent": 99.0,
+      "peak_vram_mib": 8974.0,
+      "mean_cpu_percent_all_48_vcpus": 5.480892732940457
+    },
+    "cycles_stages": [
+      {
+        "frame": 80,
+        "scene_sync_seconds": 1.75412,
+        "path_trace_seconds": 0.798573,
+        "denoise_seconds": 0.126793,
+        "bvh_submission_span_seconds": 0.26199999999999957,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 81,
+        "scene_sync_seconds": 1.70395,
+        "path_trace_seconds": 0.789712,
+        "denoise_seconds": 0.021715,
+        "bvh_submission_span_seconds": 0.04100000000000037,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 82,
+        "scene_sync_seconds": 1.68531,
+        "path_trace_seconds": 0.798548,
+        "denoise_seconds": 0.02168,
+        "bvh_submission_span_seconds": 0.041999999999999815,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 560,
+        "scene_sync_seconds": 1.73807,
+        "path_trace_seconds": 0.745617,
+        "denoise_seconds": 0.021738,
+        "bvh_submission_span_seconds": 0.24399999999999977,
+        "bvh_submissions": 259
+      },
+      {
+        "frame": 561,
+        "scene_sync_seconds": 1.69522,
+        "path_trace_seconds": 0.757164,
+        "denoise_seconds": 0.021709,
+        "bvh_submission_span_seconds": 0.04100000000000037,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 562,
+        "scene_sync_seconds": 1.69504,
+        "path_trace_seconds": 0.751741,
+        "denoise_seconds": 0.021706,
+        "bvh_submission_span_seconds": 0.04200000000000159,
+        "bvh_submissions": 2
+      }
+    ],
+    "profiling_note": "Cycles logs provide synchronization/path/denoise durations. BVH submission span is timestamped first-to-last OptiX BVH submission, not an isolated GPU timer; device upload/setup overlaps and is included in total render duration."
+  },
+  "png0": {
+    "config": {
+      "compression": 0
+    },
+    "workers": 1,
+    "frames": 6,
+    "wall_seconds": 30.94491903100004,
+    "frames_hour_including_startup": 698.014429391834,
+    "exit_codes": [
+      0
+    ],
+    "timings": [
+      {
+        "frame": 80,
+        "seconds": 4.768771056999981,
+        "evaluation": 0.0014969200000223282,
+        "render": 4.5566371769999705,
+        "save": 0.19050245100004304,
+        "validation": 0.031407127999955264,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 81,
+        "seconds": 4.6435346729999765,
+        "evaluation": 0.28316988699998547,
+        "render": 4.204479343000003,
+        "save": 0.1360609239999917,
+        "validation": 0.04109115799997198,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 82,
+        "seconds": 4.675492681000037,
+        "evaluation": 0.27051980700002787,
+        "render": 4.250272000999985,
+        "save": 0.13388842400001977,
+        "validation": 0.05249246799996854,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 560,
+        "seconds": 4.627045803000044,
+        "evaluation": 0.2904683160000445,
+        "render": 4.183491543999992,
+        "save": 0.13288453399997024,
+        "validation": 0.061565276999999696,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 561,
+        "seconds": 4.62326372299998,
+        "evaluation": 0.27176825699996243,
+        "render": 4.198508483000012,
+        "save": 0.13193894400001227,
+        "validation": 0.07285749699997268,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 562,
+        "seconds": 4.593771805000017,
+        "evaluation": 0.2854928269999846,
+        "render": 4.156533925000019,
+        "save": 0.13212709399999767,
+        "validation": 0.08096544599999334,
+        "engine": "CYCLES",
+        "samples": 64
+      }
+    ],
+    "mean_seconds": 4.655313290333339,
+    "stage_means": {
+      "evaluation": 0.2338193356666712,
+      "render": 4.258320412166664,
+      "save": 0.14290039516667244,
+      "validation": 0.05672982899997692
+    },
+    "diffs": {
+      "80": {
+        "mae": 3.667311102617532e-05,
+        "rmse": 0.00038098840741440654,
+        "p99": 0.0,
+        "max": 0.03529411554336548
+      },
+      "560": {
+        "mae": 8.762193465372548e-05,
+        "rmse": 0.0018749501323327422,
+        "p99": 0.003921568393707275,
+        "max": 0.4901961088180542
+      }
+    },
+    "telemetry_summary": {
+      "mean_gpu_percent": 18.183673469387756,
+      "peak_gpu_percent": 99.0,
+      "peak_vram_mib": 8738.0,
+      "mean_cpu_percent_all_48_vcpus": 8.011520958538616
+    },
+    "cycles_stages": [
+      {
+        "frame": 80,
+        "scene_sync_seconds": 1.76663,
+        "path_trace_seconds": 0.804922,
+        "denoise_seconds": 0.016621,
+        "bvh_submission_span_seconds": 0.26099999999999923,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 81,
+        "scene_sync_seconds": 1.74446,
+        "path_trace_seconds": 0.793083,
+        "denoise_seconds": 0.013626,
+        "bvh_submission_span_seconds": 0.26500000000000057,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 82,
+        "scene_sync_seconds": 1.75887,
+        "path_trace_seconds": 0.799718,
+        "denoise_seconds": 0.013211,
+        "bvh_submission_span_seconds": 0.2649999999999988,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 560,
+        "scene_sync_seconds": 1.77126,
+        "path_trace_seconds": 0.753535,
+        "denoise_seconds": 0.013215,
+        "bvh_submission_span_seconds": 0.26699999999999946,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 561,
+        "scene_sync_seconds": 1.74426,
+        "path_trace_seconds": 0.76193,
+        "denoise_seconds": 0.01348,
+        "bvh_submission_span_seconds": 0.259999999999998,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 562,
+        "scene_sync_seconds": 1.76114,
+        "path_trace_seconds": 0.75584,
+        "denoise_seconds": 0.013385,
+        "bvh_submission_span_seconds": 0.26399999999999935,
+        "bvh_submissions": 271
+      }
+    ],
+    "profiling_note": "Cycles logs provide synchronization/path/denoise durations. BVH submission span is timestamped first-to-last OptiX BVH submission, not an isolated GPU timer; device upload/setup overlaps and is included in total render duration."
+  },
+  "png3": {
+    "config": {
+      "compression": 3
+    },
+    "workers": 1,
+    "frames": 6,
+    "wall_seconds": 31.050744173999988,
+    "frames_hour_including_startup": 695.6355016472208,
+    "exit_codes": [
+      0
+    ],
+    "timings": [
+      {
+        "frame": 80,
+        "seconds": 4.788014926000017,
+        "evaluation": 0.0014949399999864,
+        "render": 4.577312715000005,
+        "save": 0.18953106200001457,
+        "validation": 0.031063598000002912,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 81,
+        "seconds": 4.659611821999988,
+        "evaluation": 0.28365423700000747,
+        "render": 4.223589091999997,
+        "save": 0.13250643399999262,
+        "validation": 0.04099810799999659,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 82,
+        "seconds": 4.679139071000009,
+        "evaluation": 0.2783982269999683,
+        "render": 4.244947411000055,
+        "save": 0.13395443399997475,
+        "validation": 0.05344608699999753,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 560,
+        "seconds": 4.6273421440000675,
+        "evaluation": 0.29573406700001215,
+        "render": 4.180608463999988,
+        "save": 0.1313989139999876,
+        "validation": 0.06152972699999282,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 561,
+        "seconds": 4.651138442000047,
+        "evaluation": 0.27582387699999344,
+        "render": 4.228415902000052,
+        "save": 0.1287699839999732,
+        "validation": 0.06983250600001156,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 562,
+        "seconds": 4.643986167999969,
+        "evaluation": 0.2918664369999533,
+        "render": 4.200841814,
+        "save": 0.13109124599998268,
+        "validation": 0.08254318400008742,
+        "engine": "CYCLES",
+        "samples": 64
+      }
+    ],
+    "mean_seconds": 4.6748720955000165,
+    "stage_means": {
+      "evaluation": 0.23782863083332018,
+      "render": 4.275952566333349,
+      "save": 0.14120867899998757,
+      "validation": 0.05656886833334814
+    },
+    "diffs": {
+      "80": {
+        "mae": 3.608811675803736e-05,
+        "rmse": 0.00037810951471328735,
+        "p99": 0.0,
+        "max": 0.03529411554336548
+      },
+      "560": {
+        "mae": 8.191437518689781e-05,
+        "rmse": 0.0016960453940555453,
+        "p99": 0.003921568393707275,
+        "max": 0.529411792755127
+      }
+    },
+    "telemetry_summary": {
+      "mean_gpu_percent": 16.96969696969697,
+      "peak_gpu_percent": 99.0,
+      "peak_vram_mib": 8738.0,
+      "mean_cpu_percent_all_48_vcpus": 7.8683724452979975
+    },
+    "cycles_stages": [
+      {
+        "frame": 80,
+        "scene_sync_seconds": 1.78206,
+        "path_trace_seconds": 0.806409,
+        "denoise_seconds": 0.015058,
+        "bvh_submission_span_seconds": 0.2599999999999998,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 81,
+        "scene_sync_seconds": 1.7792,
+        "path_trace_seconds": 0.785797,
+        "denoise_seconds": 0.013282,
+        "bvh_submission_span_seconds": 0.2680000000000007,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 82,
+        "scene_sync_seconds": 1.78113,
+        "path_trace_seconds": 0.789845,
+        "denoise_seconds": 0.01322,
+        "bvh_submission_span_seconds": 0.26200000000000045,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 560,
+        "scene_sync_seconds": 1.77599,
+        "path_trace_seconds": 0.749223,
+        "denoise_seconds": 0.013363,
+        "bvh_submission_span_seconds": 0.26399999999999935,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 561,
+        "scene_sync_seconds": 1.76033,
+        "path_trace_seconds": 0.760103,
+        "denoise_seconds": 0.013423,
+        "bvh_submission_span_seconds": 0.2680000000000007,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 562,
+        "scene_sync_seconds": 1.79452,
+        "path_trace_seconds": 0.756993,
+        "denoise_seconds": 0.013251,
+        "bvh_submission_span_seconds": 0.2610000000000028,
+        "bvh_submissions": 271
+      }
+    ],
+    "profiling_note": "Cycles logs provide synchronization/path/denoise durations. BVH submission span is timestamped first-to-last OptiX BVH submission, not an isolated GPU timer; device upload/setup overlaps and is included in total render duration."
+  },
+  "reuse_engine": {
+    "config": {
+      "reuse_engine": true,
+      "compression": 0
+    },
+    "workers": 1,
+    "frames": 6,
+    "wall_seconds": 24.61572951200003,
+    "frames_hour_including_startup": 877.4877051468299,
+    "exit_codes": [
+      0
+    ],
+    "timings": [
+      {
+        "frame": 80,
+        "seconds": 4.80267164899999,
+        "evaluation": 0.0014243699999951787,
+        "render": 4.594138332,
+        "save": 0.18699742799998376,
+        "validation": 0.031514588000050026,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 81,
+        "seconds": 3.3180937550000067,
+        "evaluation": 0.000679910000030759,
+        "render": 3.1704782439999804,
+        "save": 0.1262991520000014,
+        "validation": 0.042441136999968876,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 82,
+        "seconds": 3.262075849000041,
+        "evaluation": 0.0007969900000261987,
+        "render": 3.1190097479999963,
+        "save": 0.12182410200000504,
+        "validation": 0.05198337699999911,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 560,
+        "seconds": 3.6462395330000277,
+        "evaluation": 0.008786319000023468,
+        "render": 3.4812770049999813,
+        "save": 0.1359268810000458,
+        "validation": 0.06181002599998919,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 561,
+        "seconds": 3.3072234750000007,
+        "evaluation": 0.0007629300000076,
+        "render": 3.15938433499997,
+        "save": 0.12625242200005005,
+        "validation": 0.07241593499998089,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 562,
+        "seconds": 3.254326323999976,
+        "evaluation": 0.0007176199999889832,
+        "render": 3.1117156209999735,
+        "save": 0.12138480400000162,
+        "validation": 0.08220463600002859,
+        "engine": "CYCLES",
+        "samples": 64
+      }
+    ],
+    "mean_seconds": 3.5984384308333404,
+    "stage_means": {
+      "evaluation": 0.0021946898333453646,
+      "render": 3.439333880833317,
+      "save": 0.13644746483334794,
+      "validation": 0.05706161650000278
+    },
+    "diffs": {
+      "80": {
+        "mae": 3.646066033979878e-05,
+        "rmse": 0.0003782435960602015,
+        "p99": 0.0,
+        "max": 0.0156862735748291
+      },
+      "560": {
+        "mae": 9.142891212832183e-05,
+        "rmse": 0.0020152772776782513,
+        "p99": 0.003921568393707275,
+        "max": 0.4901961088180542
+      }
+    },
+    "telemetry_summary": {
+      "mean_gpu_percent": 20.153846153846153,
+      "peak_gpu_percent": 99.0,
+      "peak_vram_mib": 8740.0,
+      "mean_cpu_percent_all_48_vcpus": 5.4395953699278685
+    },
+    "cycles_stages": [
+      {
+        "frame": 80,
+        "scene_sync_seconds": 1.78172,
+        "path_trace_seconds": 0.799648,
+        "denoise_seconds": 0.016343,
+        "bvh_submission_span_seconds": 0.26200000000000045,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 81,
+        "scene_sync_seconds": 1.70453,
+        "path_trace_seconds": 0.784278,
+        "denoise_seconds": 0.005891,
+        "bvh_submission_span_seconds": 0.0470000000000006,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 82,
+        "scene_sync_seconds": 1.69021,
+        "path_trace_seconds": 0.795565,
+        "denoise_seconds": 0.006146,
+        "bvh_submission_span_seconds": 0.041999999999999815,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 560,
+        "scene_sync_seconds": 1.77827,
+        "path_trace_seconds": 0.755899,
+        "denoise_seconds": 0.006186,
+        "bvh_submission_span_seconds": 0.25,
+        "bvh_submissions": 259
+      },
+      {
+        "frame": 561,
+        "scene_sync_seconds": 1.71949,
+        "path_trace_seconds": 0.763857,
+        "denoise_seconds": 0.00623,
+        "bvh_submission_span_seconds": 0.0470000000000006,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 562,
+        "scene_sync_seconds": 1.71227,
+        "path_trace_seconds": 0.763759,
+        "denoise_seconds": 0.006181,
+        "bvh_submission_span_seconds": 0.045000000000001705,
+        "bvh_submissions": 2
+      }
+    ],
+    "profiling_note": "Cycles logs provide synchronization/path/denoise durations. BVH submission span is timestamped first-to-last OptiX BVH submission, not an isolated GPU timer; device upload/setup overlaps and is included in total render duration."
+  },
+  "threads16": {
+    "config": {
+      "reuse_engine": true,
+      "compression": 0,
+      "threads": 16
+    },
+    "workers": 1,
+    "frames": 6,
+    "wall_seconds": 24.153618969000036,
+    "frames_hour_including_startup": 894.2759272522483,
+    "exit_codes": [
+      0
+    ],
+    "timings": [
+      {
+        "frame": 80,
+        "seconds": 4.7259295000000066,
+        "evaluation": 0.0012704399999847737,
+        "render": 4.510518852000018,
+        "save": 0.19316975899994304,
+        "validation": 0.03248161900000923,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 81,
+        "seconds": 3.2754913200000146,
+        "evaluation": 0.0006597599999622616,
+        "render": 3.1304869409999583,
+        "save": 0.12357789899999716,
+        "validation": 0.04252265000002353,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 82,
+        "seconds": 3.24039669900003,
+        "evaluation": 0.0006431600000951221,
+        "render": 3.0931080299999394,
+        "save": 0.1266797600000018,
+        "validation": 0.05181943900004171,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 560,
+        "seconds": 3.4839336280000452,
+        "evaluation": 0.007389660000058029,
+        "render": 3.324322539000036,
+        "save": 0.13033975999996983,
+        "validation": 0.06361727900002734,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 561,
+        "seconds": 3.2045238900000186,
+        "evaluation": 0.0006549299999960567,
+        "render": 3.0618280909999385,
+        "save": 0.12099332900004356,
+        "validation": 0.07309060000000045,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 562,
+        "seconds": 3.209668620000002,
+        "evaluation": 0.00062991000004331,
+        "render": 3.067194560999951,
+        "save": 0.1207569189999731,
+        "validation": 0.08324555900003361,
+        "engine": "CYCLES",
+        "samples": 64
+      }
+    ],
+    "mean_seconds": 3.5233239428333527,
+    "stage_means": {
+      "evaluation": 0.0018746433333565922,
+      "render": 3.364576502333307,
+      "save": 0.13591957099998808,
+      "validation": 0.057796191000022645
+    },
+    "diffs": {
+      "80": {
+        "mae": 3.686789932544343e-05,
+        "rmse": 0.0003819960111286491,
+        "p99": 0.0,
+        "max": 0.03529411554336548
+      },
+      "560": {
+        "mae": 9.178506297757849e-05,
+        "rmse": 0.0017944216961041093,
+        "p99": 0.003921568393707275,
+        "max": 0.529411792755127
+      }
+    },
+    "telemetry_summary": {
+      "mean_gpu_percent": 20.545454545454547,
+      "peak_gpu_percent": 99.0,
+      "peak_vram_mib": 8738.0,
+      "mean_cpu_percent_all_48_vcpus": 3.60370716580967
+    },
+    "cycles_stages": [
+      {
+        "frame": 80,
+        "scene_sync_seconds": 1.72187,
+        "path_trace_seconds": 0.794984,
+        "denoise_seconds": 0.018234,
+        "bvh_submission_span_seconds": 0.25400000000000045,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 81,
+        "scene_sync_seconds": 1.69225,
+        "path_trace_seconds": 0.789318,
+        "denoise_seconds": 0.005932,
+        "bvh_submission_span_seconds": 0.040000000000000924,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 82,
+        "scene_sync_seconds": 1.67131,
+        "path_trace_seconds": 0.797762,
+        "denoise_seconds": 0.006059,
+        "bvh_submission_span_seconds": 0.031000000000000583,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 560,
+        "scene_sync_seconds": 1.71629,
+        "path_trace_seconds": 0.745598,
+        "denoise_seconds": 0.005968,
+        "bvh_submission_span_seconds": 0.22000000000000064,
+        "bvh_submissions": 259
+      },
+      {
+        "frame": 561,
+        "scene_sync_seconds": 1.66644,
+        "path_trace_seconds": 0.758428,
+        "denoise_seconds": 0.00618,
+        "bvh_submission_span_seconds": 0.030000000000001137,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 562,
+        "scene_sync_seconds": 1.68484,
+        "path_trace_seconds": 0.754585,
+        "denoise_seconds": 0.006167,
+        "bvh_submission_span_seconds": 0.03200000000000003,
+        "bvh_submissions": 2
+      }
+    ],
+    "profiling_note": "Cycles logs provide synchronization/path/denoise durations. BVH submission span is timestamped first-to-last OptiX BVH submission, not an isolated GPU timer; device upload/setup overlaps and is included in total render duration."
+  },
+  "threads8": {
+    "config": {
+      "reuse_engine": true,
+      "compression": 0,
+      "threads": 8
+    },
+    "workers": 1,
+    "frames": 6,
+    "wall_seconds": 25.077945804000024,
+    "frames_hour_including_startup": 861.3145657470367,
+    "exit_codes": [
+      0
+    ],
+    "timings": [
+      {
+        "frame": 80,
+        "seconds": 4.949763639999901,
+        "evaluation": 0.0013835399998924913,
+        "render": 4.7297912510000515,
+        "save": 0.20015619900004822,
+        "validation": 0.030315438999991784,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 81,
+        "seconds": 3.425666878999891,
+        "evaluation": 0.0005889509999406073,
+        "render": 3.2583959989999585,
+        "save": 0.14712444900010269,
+        "validation": 0.04107208999994327,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 82,
+        "seconds": 3.35051139899997,
+        "evaluation": 0.0006095700000514626,
+        "render": 3.1922479999999496,
+        "save": 0.13844119899999896,
+        "validation": 0.05069177999996555,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 560,
+        "seconds": 3.6388852769999858,
+        "evaluation": 0.007610849999991842,
+        "render": 3.4612769380000827,
+        "save": 0.14894985899991298,
+        "validation": 0.06296099000007871,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 561,
+        "seconds": 3.348117789000071,
+        "evaluation": 0.0006417700000156401,
+        "render": 3.1896937999999864,
+        "save": 0.1363883789999818,
+        "validation": 0.07327801000008094,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 562,
+        "seconds": 3.3687001690000216,
+        "evaluation": 0.0006241099999897415,
+        "render": 3.211101190000022,
+        "save": 0.13689986899998985,
+        "validation": 0.0819670490000135,
+        "engine": "CYCLES",
+        "samples": 64
+      }
+    ],
+    "mean_seconds": 3.68027419216664,
+    "stage_means": {
+      "evaluation": 0.0019097984999802975,
+      "render": 3.5070845296666753,
+      "save": 0.15132665900000575,
+      "validation": 0.05671422633334563
+    },
+    "diffs": {
+      "80": {
+        "mae": 3.606353129725903e-05,
+        "rmse": 0.00037817168049514294,
+        "p99": 0.0,
+        "max": 0.03529411554336548
+      },
+      "560": {
+        "mae": 9.397628309670836e-05,
+        "rmse": 0.0020595008973032236,
+        "p99": 0.003921568393707275,
+        "max": 0.5215686559677124
+      }
+    },
+    "telemetry_summary": {
+      "mean_gpu_percent": 20.475,
+      "peak_gpu_percent": 99.0,
+      "peak_vram_mib": 8736.0,
+      "mean_cpu_percent_all_48_vcpus": 3.4482081273980563
+    },
+    "cycles_stages": [
+      {
+        "frame": 80,
+        "scene_sync_seconds": 1.73679,
+        "path_trace_seconds": 0.797054,
+        "denoise_seconds": 0.016535,
+        "bvh_submission_span_seconds": 0.2450000000000001,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 81,
+        "scene_sync_seconds": 1.7116,
+        "path_trace_seconds": 0.790518,
+        "denoise_seconds": 0.005959,
+        "bvh_submission_span_seconds": 0.04100000000000037,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 82,
+        "scene_sync_seconds": 1.67551,
+        "path_trace_seconds": 0.800556,
+        "denoise_seconds": 0.005935,
+        "bvh_submission_span_seconds": 0.040000000000000924,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 560,
+        "scene_sync_seconds": 1.73426,
+        "path_trace_seconds": 0.748409,
+        "denoise_seconds": 0.006163,
+        "bvh_submission_span_seconds": 0.2370000000000001,
+        "bvh_submissions": 259
+      },
+      {
+        "frame": 561,
+        "scene_sync_seconds": 1.70646,
+        "path_trace_seconds": 0.757727,
+        "denoise_seconds": 0.00616,
+        "bvh_submission_span_seconds": 0.04100000000000037,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 562,
+        "scene_sync_seconds": 1.74015,
+        "path_trace_seconds": 0.756017,
+        "denoise_seconds": 0.006195,
+        "bvh_submission_span_seconds": 0.03999999999999915,
+        "bvh_submissions": 2
+      }
+    ],
+    "profiling_note": "Cycles logs provide synchronization/path/denoise durations. BVH submission span is timestamped first-to-last OptiX BVH submission, not an isolated GPU timer; device upload/setup overlaps and is included in total render duration."
+  },
+  "tile512": {
+    "config": {
+      "compression": 0,
+      "tile_size": 512,
+      "reuse_engine": true
+    },
+    "workers": 1,
+    "frames": 6,
+    "wall_seconds": 33.39859574000002,
+    "frames_hour_including_startup": 646.733777915418,
+    "exit_codes": [
+      0
+    ],
+    "timings": [
+      {
+        "frame": 80,
+        "seconds": 6.089837748000036,
+        "evaluation": 0.0012875700000449797,
+        "render": 5.882807221000007,
+        "save": 0.18583640499991816,
+        "validation": 0.03146928400008164,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 81,
+        "seconds": 4.624294116999977,
+        "evaluation": 0.0006132699999170654,
+        "render": 4.468940616000054,
+        "save": 0.13496457799999462,
+        "validation": 0.04158088500003032,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 82,
+        "seconds": 4.556581847999951,
+        "evaluation": 0.0007037309999304853,
+        "render": 4.403162537000071,
+        "save": 0.1314593369999102,
+        "validation": 0.05276954700002534,
+        "engine": "CYCLES",
+        "samples": 48
+      },
+      {
+        "frame": 560,
+        "seconds": 5.2532241490000615,
+        "evaluation": 0.00811609100003352,
+        "render": 5.094051207999996,
+        "save": 0.13258674799999426,
+        "validation": 0.060392727000021296,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 561,
+        "seconds": 4.9466247690000955,
+        "evaluation": 0.0007099010000501949,
+        "render": 4.801092348999987,
+        "save": 0.12628339700006563,
+        "validation": 0.07024895899996864,
+        "engine": "CYCLES",
+        "samples": 64
+      },
+      {
+        "frame": 562,
+        "seconds": 4.915717024999935,
+        "evaluation": 0.0006520900000168695,
+        "render": 4.771015315999989,
+        "save": 0.12594361599997228,
+        "validation": 0.08009933100004218,
+        "engine": "CYCLES",
+        "samples": 64
+      }
+    ],
+    "mean_seconds": 5.064379942666676,
+    "stage_means": {
+      "evaluation": 0.0020137754999988524,
+      "render": 4.903511541166684,
+      "save": 0.13951234683330918,
+      "validation": 0.056093455500028234
+    },
+    "diffs": {
+      "80": {
+        "mae": 9.01877210708335e-05,
+        "rmse": 0.0006371560739353299,
+        "p99": 0.003921568393707275,
+        "max": 0.05882352590560913
+      },
+      "560": {
+        "mae": 0.0002246296644443646,
+        "rmse": 0.004994899965822697,
+        "p99": 0.003921568393707275,
+        "max": 0.6352941393852234
+      }
+    },
+    "telemetry_summary": {
+      "mean_gpu_percent": 32.65094339622642,
+      "peak_gpu_percent": 97.0,
+      "peak_vram_mib": 8740.0,
+      "mean_cpu_percent_all_48_vcpus": 5.708247902470247
+    },
+    "cycles_stages": [
+      {
+        "frame": 80,
+        "scene_sync_seconds": 1.7673,
+        "path_trace_seconds": 0.041399,
+        "denoise_seconds": 0.0,
+        "bvh_submission_span_seconds": 0.2610000000000001,
+        "bvh_submissions": 271
+      },
+      {
+        "frame": 81,
+        "scene_sync_seconds": 1.70801,
+        "path_trace_seconds": 0.04282,
+        "denoise_seconds": 0.0,
+        "bvh_submission_span_seconds": 0.03200000000000003,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 82,
+        "scene_sync_seconds": 1.67149,
+        "path_trace_seconds": 0.039641,
+        "denoise_seconds": 0.0,
+        "bvh_submission_span_seconds": 0.031000000000000583,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 560,
+        "scene_sync_seconds": 1.72707,
+        "path_trace_seconds": 0.106118,
+        "denoise_seconds": 0.0,
+        "bvh_submission_span_seconds": 0.24799999999999756,
+        "bvh_submissions": 259
+      },
+      {
+        "frame": 561,
+        "scene_sync_seconds": 1.68039,
+        "path_trace_seconds": 0.111901,
+        "denoise_seconds": 0.0,
+        "bvh_submission_span_seconds": 0.029999999999997584,
+        "bvh_submissions": 2
+      },
+      {
+        "frame": 562,
+        "scene_sync_seconds": 1.68777,
+        "path_trace_seconds": 0.115095,
+        "denoise_seconds": 0.0,
+        "bvh_submission_span_seconds": 0.03100000000000236,
+        "bvh_submissions": 2
+      }
+    ],
+    "profiling_note": "Cycles logs provide synchronization/path/denoise durations. BVH submission span is timestamped first-to-last OptiX BVH submission, not an isolated GPU timer; device upload/setup overlaps and is included in total render duration."
+  }
+}

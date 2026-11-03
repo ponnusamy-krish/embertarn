@@ -1,0 +1,99 @@
+{
+  "config": {
+    "compression": 0,
+    "max_bounces": 4,
+    "glossy_bounces": 2,
+    "transmission_bounces": 4,
+    "reuse_engine": true
+  },
+  "workers": 1,
+  "frames": 6,
+  "wall_seconds": 24.55535467300001,
+  "frames_hour_including_startup": 879.6452051963399,
+  "exit_codes": [
+    0
+  ],
+  "timings": [
+    {
+      "frame": 80,
+      "seconds": 4.832307713999967,
+      "evaluation": 0.0013786499999923763,
+      "render": 4.624085386000047,
+      "save": 0.18524508899997727,
+      "validation": 0.0327793980000024,
+      "engine": "CYCLES",
+      "samples": 48
+    },
+    {
+      "frame": 81,
+      "seconds": 3.335086402999991,
+      "evaluation": 0.0006987799999933486,
+      "render": 3.188681871999961,
+      "save": 0.12672714200004975,
+      "validation": 0.04049151799995343,
+      "engine": "CYCLES",
+      "samples": 48
+    },
+    {
+      "frame": 82,
+      "seconds": 3.275447225999983,
+      "evaluation": 0.0007774599999947895,
+      "render": 3.1338880340000514,
+      "save": 0.12130904299999656,
+      "validation": 0.05101604699996187,
+      "engine": "CYCLES",
+      "samples": 48
+    },
+    {
+      "frame": 560,
+      "seconds": 3.595555227000091,
+      "evaluation": 0.00764093899999807,
+      "render": 3.428916037000022,
+      "save": 0.13809392200005277,
+      "validation": 0.0621613470000284,
+      "engine": "CYCLES",
+      "samples": 64
+    },
+    {
+      "frame": 561,
+      "seconds": 3.2815257849999853,
+      "evaluation": 0.0008541790000435867,
+      "render": 3.1318984150000233,
+      "save": 0.12581335300001228,
+      "validation": 0.07439664499997889,
+      "engine": "CYCLES",
+      "samples": 64
+    },
+    {
+      "frame": 562,
+      "seconds": 3.241579168000044,
+      "evaluation": 0.0006397700000206896,
+      "render": 3.0976501869999993,
+      "save": 0.121506601999954,
+      "validation": 0.08314310600007957,
+      "engine": "CYCLES",
+      "samples": 64
+    }
+  ],
+  "mean_seconds": 3.593583587166677,
+  "stage_means": {
+    "evaluation": 0.001998296333340477,
+    "render": 3.434186655166684,
+    "save": 0.13644919183334045,
+    "validation": 0.05733134350000076
+  },
+  "diffs": {
+    "80": {
+      "mae": 0.00011412885214667767,
+      "rmse": 0.000686262093950063,
+      "p99": 0.003921568393707275,
+      "max": 0.03529411554336548
+    },
+    "560": {
+      "mae": 0.00011417083442211151,
+      "rmse": 0.00213998812250793,
+      "p99": 0.003921568393707275,
+      "max": 0.529411792755127
+    }
+  }
+}

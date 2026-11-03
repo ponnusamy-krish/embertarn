@@ -1,0 +1,20 @@
+{
+  "horizontal_metres_per_original_sample": 5,
+  "horizontal_metres_per_eroded_sample": 1.25,
+  "blender_units_per_metre": 1,
+  "stored_elevation_unit": "metres, rebased",
+  "absolute_elevation_offset": 1862,
+  "source_lake_plateau": 1920,
+  "target_water_elevation": 1884,
+  "vertical_scale": 1,
+  "note": "Source elevation is shifted down 36 m to match specified lake level; this is an additive datum correction, not vertical flattening. Round 9 adds artistic cliff shaping and 17% uplift only above relative elevation 620 m; neither is presented as original DEM data.",
+  "original_absolute_range": [
+    1608.9375,
+    3453.6328125
+  ],
+  "original_slope_degrees_percentiles_50_90_99": [
+    22.016904830932617,
+    47.53526611328126,
+    62.008922119140614
+  ]
+}

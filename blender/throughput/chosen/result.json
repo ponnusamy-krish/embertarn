@@ -1,0 +1,290 @@
+{
+  "config": {
+    "workers": 3,
+    "threads": 16,
+    "reuse_engine": true,
+    "camera_only_blur": true,
+    "compression": 0,
+    "persistent": true,
+    "denoiser": "OPTIX",
+    "adaptive_threshold": 0.045,
+    "adaptive_min_samples": 8,
+    "max_bounces": 6,
+    "diffuse_bounces": 2,
+    "glossy_bounces": 3,
+    "transmission_bounces": 6,
+    "tile_size": 2048
+  },
+  "workers": 3,
+  "frames": 24,
+  "wall_seconds": 42.244464280999864,
+  "frames_hour_including_startup": 2045.2383873372921,
+  "exit_codes": [
+    0,
+    0,
+    0
+  ],
+  "timings": [
+    {
+      "frame": 81,
+      "seconds": 7.492233070999873,
+      "evaluation": 0.0014126500000202213,
+      "render": 7.266053774999818,
+      "save": 0.19748812600005294,
+      "validation": 0.027278519999981654,
+      "engine": "CYCLES",
+      "samples": 48
+    },
+    {
+      "frame": 84,
+      "seconds": 5.022734213999911,
+      "evaluation": 0.0005993299998863222,
+      "render": 4.868796476999933,
+      "save": 0.13452041699997608,
+      "validation": 0.01881799000011597,
+      "engine": "CYCLES",
+      "samples": 48
+    },
+    {
+      "frame": 87,
+      "seconds": 4.758142298999928,
+      "evaluation": 0.0005722400001104688,
+      "render": 4.6067875319999985,
+      "save": 0.13447122699994907,
+      "validation": 0.016311299999870243,
+      "engine": "CYCLES",
+      "samples": 48
+    },
+    {
+      "frame": 90,
+      "seconds": 4.535601044000032,
+      "evaluation": 0.0006259499998577667,
+      "render": 4.37853235700004,
+      "save": 0.1374471070000709,
+      "validation": 0.018995630000063102,
+      "engine": "CYCLES",
+      "samples": 48
+    },
+    {
+      "frame": 561,
+      "seconds": 5.137307309999869,
+      "evaluation": 0.01662014899989117,
+      "render": 4.961093265000045,
+      "save": 0.13936965699986104,
+      "validation": 0.020224239000071975,
+      "engine": "CYCLES",
+      "samples": 64
+    },
+    {
+      "frame": 564,
+      "seconds": 4.715126069999997,
+      "evaluation": 0.0005971900000076857,
+      "render": 4.564907413000128,
+      "save": 0.12979658799986282,
+      "validation": 0.019824878999997964,
+      "engine": "CYCLES",
+      "samples": 64
+    },
+    {
+      "frame": 567,
+      "seconds": 4.419881505999911,
+      "evaluation": 0.0006937400000879279,
+      "render": 4.2672567089998665,
+      "save": 0.13179123700001583,
+      "validation": 0.0201398199999403,
+      "engine": "CYCLES",
+      "samples": 64
+    },
+    {
+      "frame": 570,
+      "seconds": 2.98870703700004,
+      "evaluation": 0.0006316900000911119,
+      "render": 2.8466390700000375,
+      "save": 0.1254911969999739,
+      "validation": 0.01594507999993766,
+      "engine": "CYCLES",
+      "samples": 64
+    },
+    {
+      "frame": 80,
+      "seconds": 7.492387920999818,
+      "evaluation": 0.0014756199998373631,
+      "render": 7.258914315000084,
+      "save": 0.2040155560000585,
+      "validation": 0.027982429999838132,
+      "engine": "CYCLES",
+      "samples": 48
+    },
+    {
+      "frame": 83,
+      "seconds": 5.0091724240000985,
+      "evaluation": 0.0005658500001572975,
+      "render": 4.858320116999948,
+      "save": 0.1323640069999783,
+      "validation": 0.017922450000014578,
+      "engine": "CYCLES",
+      "samples": 48
+    },
+    {
+      "frame": 86,
+      "seconds": 4.758049299000049,
+      "evaluation": 0.0006025300001510914,
+      "render": 4.612696801999846,
+      "save": 0.12793604700004835,
+      "validation": 0.016813920000004146,
+      "engine": "CYCLES",
+      "samples": 48
+    },
+    {
+      "frame": 89,
+      "seconds": 4.534129734000089,
+      "evaluation": 0.0006045800000720192,
+      "render": 4.381738896999877,
+      "save": 0.13258905700013202,
+      "validation": 0.019197200000007797,
+      "engine": "CYCLES",
+      "samples": 48
+    },
+    {
+      "frame": 560,
+      "seconds": 5.067566781999858,
+      "evaluation": 0.007680369999889081,
+      "render": 4.902235986000051,
+      "save": 0.1365964270000859,
+      "validation": 0.021053998999832402,
+      "engine": "CYCLES",
+      "samples": 64
+    },
+    {
+      "frame": 563,
+      "seconds": 4.370842347000007,
+      "evaluation": 0.0006534799999826646,
+      "render": 4.220722410000008,
+      "save": 0.12768667799991817,
+      "validation": 0.021779779000098642,
+      "engine": "CYCLES",
+      "samples": 64
+    },
+    {
+      "frame": 566,
+      "seconds": 3.9255330559999493,
+      "evaluation": 0.0006197800000791176,
+      "render": 3.776955249999901,
+      "save": 0.12781936700002916,
+      "validation": 0.020138658999940162,
+      "engine": "CYCLES",
+      "samples": 64
+    },
+    {
+      "frame": 569,
+      "seconds": 2.9701872269999967,
+      "evaluation": 0.0006318099999589322,
+      "render": 2.8206191399999625,
+      "save": 0.1285335469999609,
+      "validation": 0.02040273000011439,
+      "engine": "CYCLES",
+      "samples": 64
+    },
+    {
+      "frame": 82,
+      "seconds": 7.442020572000047,
+      "evaluation": 0.0011753399999179237,
+      "render": 7.207382757000005,
+      "save": 0.21307034500000555,
+      "validation": 0.020392130000118414,
+      "engine": "CYCLES",
+      "samples": 48
+    },
+    {
+      "frame": 85,
+      "seconds": 4.844051916999888,
+      "evaluation": 0.0005787600000530801,
+      "render": 4.696075240000027,
+      "save": 0.12708859700001085,
+      "validation": 0.02030931999979657,
+      "engine": "CYCLES",
+      "samples": 48
+    },
+    {
+      "frame": 88,
+      "seconds": 4.583291982999981,
+      "evaluation": 0.0009078399998543318,
+      "render": 4.429690276000201,
+      "save": 0.13112061699985134,
+      "validation": 0.02157325000007404,
+      "engine": "CYCLES",
+      "samples": 48
+    },
+    {
+      "frame": 91,
+      "seconds": 3.9592903860000206,
+      "evaluation": 0.0005786599999737518,
+      "render": 3.8106665689999772,
+      "save": 0.12791042700018806,
+      "validation": 0.02013472999988153,
+      "engine": "CYCLES",
+      "samples": 48
+    },
+    {
+      "frame": 562,
+      "seconds": 3.66111805200012,
+      "evaluation": 0.007515490000059799,
+      "render": 3.4988630049999756,
+      "save": 0.1328953580000416,
+      "validation": 0.021844199000042863,
+      "engine": "CYCLES",
+      "samples": 64
+    },
+    {
+      "frame": 565,
+      "seconds": 3.06625417500004,
+      "evaluation": 0.000635189999911745,
+      "render": 2.923100788000056,
+      "save": 0.12525503699998808,
+      "validation": 0.0172631600000841,
+      "engine": "CYCLES",
+      "samples": 64
+    },
+    {
+      "frame": 568,
+      "seconds": 4.159470111000019,
+      "evaluation": 0.0006182889999308827,
+      "render": 4.013268695000079,
+      "save": 0.12624429700008477,
+      "validation": 0.0193388299999242,
+      "engine": "CYCLES",
+      "samples": 64
+    },
+    {
+      "frame": 571,
+      "seconds": 4.313258879000159,
+      "evaluation": 0.0006782200000543526,
+      "render": 4.167038172000048,
+      "save": 0.12880619699990348,
+      "validation": 0.01673629000015353,
+      "engine": "CYCLES",
+      "samples": 64
+    }
+  ],
+  "mean_seconds": 4.717764892333321,
+  "stage_means": {
+    "evaluation": 0.0019697811666598377,
+    "render": 4.555764792374997,
+    "save": 0.14001279654166865,
+    "validation": 0.020017522249996016
+  },
+  "diffs": {
+    "80": {
+      "mae": 3.62576829502359e-05,
+      "rmse": 0.0003787530877161771,
+      "p99": 0.0,
+      "max": 0.03529411554336548
+    },
+    "560": {
+      "mae": 9.198931365972385e-05,
+      "rmse": 0.0020842638332396746,
+      "p99": 0.003921568393707275,
+      "max": 0.5215686559677124
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "gpu": "RTX PRO 6000 Blackwell Server Edition",
+  "backend": "Cycles OptiX",
+  "resolution": [
+    1920,
+    1080
+  ],
+  "fps": 24,
+  "wide_warm_seconds": 4.7818854560000545,
+  "shore_seconds": 4.775541794000067,
+  "forest_seconds": 4.665458166333035,
+  "cold_first_frame_seconds": 4.914034559000356,
+  "benchmark_process_seconds": 49.4287020189995,
+  "shot_counts": {
+    "wide": 5,
+    "close": 17,
+    "forest": 8,
+    "water": 15
+  },
+  "estimated_7200_hours": 9.513352445274077,
+  "estimate_with_20_percent_margin_hours": 11.416022934328891,
+  "note": "Includes frame evaluation, rendering, PNG writing and validation. Estimate excludes spot downtime; wider tour is not exhaustively benchmarked."
+}

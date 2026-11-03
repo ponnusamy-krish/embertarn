@@ -1,0 +1,29 @@
+{
+  "valid_frames": 24,
+  "preserved_sha256": {
+    "f_000165.png": "ea3f0926aee7753e061723b9f6f7c3ac5888e981052702866cca6112c296d25f",
+    "f_000163.png": "d6094d993afae83e969baa066ed0a8f7e1cb3db8b61654749b45e5b8663b662e",
+    "f_000160.png": "58e58c35d63099a6fe8df67d77b70ef986804c7e74b78a38c469aaef38ffcb32",
+    "f_000162.png": "7b661f61cc073db6b2d29d461e22c051a98494d3a1863524fb498177ea4f1412",
+    "f_000161.png": "bedd7e5efe22caf6122f7183260781d7493416c3af35c0fc74ad07c0cfa34326",
+    "f_000164.png": "60a4d07bf5e0faebc7dec29743bd7b112faf7ffedd26636ace184e3325be4fd3"
+  },
+  "resume_verified": true,
+  "interruption": "SIGKILL owned process group, including all Blender workers",
+  "config": {
+    "workers": 3,
+    "threads": 16,
+    "reuse_engine": true,
+    "camera_only_blur": true,
+    "compression": 0,
+    "persistent": true,
+    "denoiser": "OPTIX",
+    "adaptive_threshold": 0.045,
+    "adaptive_min_samples": 8,
+    "max_bounces": 6,
+    "diffuse_bounces": 2,
+    "glossy_bounces": 3,
+    "transmission_bounces": 6,
+    "tile_size": 2048
+  }
+}
